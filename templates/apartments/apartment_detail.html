@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ apartment.title }} - Details</title>
+</head>
+<body>
+    <h1>{{ apartment.title }}</h1>
+
+    <img src="https://placehold.co/600x400?text=House+Detail" alt="{{ apartment.title }}" style="width:600px;">
+
+    <p><strong>Address:</strong> {{ apartment.address }}</p>
+    <p><strong>Price:</strong> ISK {{ apartment.price|floatformat:0 }}</p>
+    <p><strong>Status:</strong> {% if apartment.is_sold %}SOLD{% else %}For Sale{% endif %}</p>
+    <p>{{ apartment.description }}</p>
+
+    <p><a href="{% url 'apartments_list' %}">← Back to all apartments</a></p>
+</body>
+</html>
