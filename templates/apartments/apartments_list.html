@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Properties for Sale</title>
-</head>
-<body>
-    <h1>Available Properties</h1>
+{% extends 'base.html' %}
+
+{% block title %}Properties for Sale{% endblock %}
+
+{% block content %}
+    <h2>Available Properties</h2>
     {% for apt in apartments %}
         <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-            <h2>{{ apt.title }}</h2>
-            <!-- <img src="{{ apt.image }}" alt="{{ apt.title }}" style="width:300px;"> -->
+            <h3>{{ apt.title }}</h3>
             <a href="{% url 'apartment_detail' apt.id %}">
-            <img src="https://placehold.co/300x200?text=House" alt="House" style="width:300px;">
+                <img src="https://placehold.co/300x200?text=House" alt="House" style="width:300px;">
             </a>
-
             <p><strong>Address:</strong> {{ apt.address }}</p>
             <p><strong>Price:</strong> ISK {{ apt.price|floatformat:0 }}</p>
             <p><strong>Status:</strong> {% if apt.is_sold %}SOLD{% else %}For Sale{% endif %}</p>
             <p>{{ apt.description }}</p>
         </div>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

@@ -31,12 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'listings', #fyrir database'inn
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Your apps
+    'apartments',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +78,21 @@ WSGI_APPLICATION = 'CastleApartments.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'verklegt_namskeid_db',
+        'USER': 'verklegt_db_user',
+        'PASSWORD': '4scZ9KKSuawxn2IM9IpPfMru',
+        'HOST': 'db-verklegt-namskeid-ii-eu-tpla5w.postgres.database.azure.com',
+        'PORT': '5432'
     }
 }
 

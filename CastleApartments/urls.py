@@ -22,4 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('apartments/', include('apartments.urls')),
     path('', home_view, name='home'),  # 👈 Root path shows "Hello, World!"
+    path('users/', include('users.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),  # ✅ Add this line
 ]
+
+
+
