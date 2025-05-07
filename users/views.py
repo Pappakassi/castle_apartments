@@ -15,6 +15,10 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'users/register.html', {'form': form})
 
+def profile(request):
+    return render(request, template_name='users/profile.html')
+
+
 def test_view(request):
     return HttpResponse("Users app works.")
 
