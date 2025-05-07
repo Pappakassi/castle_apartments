@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Apartment(models.Model):
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     street_name = models.CharField(max_length=255, blank=True)

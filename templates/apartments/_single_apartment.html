@@ -1,0 +1,10 @@
+<div style="border:1px solid #ccc; padding:10px; margin:10px;">
+    <h3>{{ apt.title }}</h3>
+    <a href="{% url 'apartment_detail' apt.id %}">
+        <img src="{{ apt.image|default:'https://placehold.co/300x200?text=No+Image' }}" alt="{{ apt.title }}" style="width:300px;">
+    </a>
+    <p><strong>Address:</strong> {{ apt.address }}</p>
+    <p><strong>Price:</strong> ISK {{ apt.listing_price|floatformat:0 }}</p>
+    <p><strong>Status:</strong> {% if apt.is_sold %}SOLD{% else %}For Sale{% endif %}</p>
+    <p>{{ apt.description }}</p>
+</div>
