@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Apartments(models.Model):
+class Apartment(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
@@ -18,15 +18,11 @@ class Apartments(models.Model):
     def __str__(self):
         return f"{self.title} ({self.city})"
 
+class ApartmentImage(models.Model):
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='images')
+    image_url = models.URLField(max_length=500)
+    caption = models.CharField(max_length=255, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
-#byggt á fyrsta data.py sem við gerðum:
-# class Apartment(models.Model):
-#     title = models.CharField(max_length=255)
-#     address = models.CharField(max_length=255)
-#     price = models.PositiveIntegerField()
-#     is_sold = models.BooleanField(default=False)
-#     description = models.TextField()
-#     image = models.URLField(max_length=500, blank=True)
-#
-#     def __str__(self):
-#         return f"{self.title} — {self.address}"
+    def __str__(self):
+        return f"Image for {self.apartment.title}"
