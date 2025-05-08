@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Profile</h1>
+  <h1>Profile</h1>
+
+  <form method="post" action="{% url 'profile' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" class="btn btn-primary" value="Save Changes" />
+  </form>
+
+
+
 {% endblock %}

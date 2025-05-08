@@ -2,8 +2,34 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
-from .forms import BuyerSignUpForm
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404, redirect
+from apartments.models import Apartment
+from users.models import Buyer
+from django.contrib.auth.decorators import login_required
+from users.forms.buyer_form import BuyerForm
+
+
+
+
+
+#Favoriting is an action performed by a user (Buyer).
+#It's conceptually part of the user's account behavior, not apartment management.
+@login_required
+def favorite_apartment(request, apartment_id):
+    buyer = request.user.buyer
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+    buyer.favorites.add(apartment)
+    return redirect('apartment_detail', pk=apartment.id)  # 🔧 fixed
+
+@login_required
+def unfavorite_apartment(request, apartment_id):
+    buyer = request.user.buyer
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+    buyer.favorites.remove(apartment)
+    return redirect('apartment_detail', pk=apartment.id)  # 🔧 fixed
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -15,18 +41,18 @@ def register(request):
         form = UserCreationForm() #þetta er innbyggt í django
     return render(request, 'users/register.html', {'form': form})
 
+@login_required
 def profile(request):
-    return render(request, template_name='users/profile.html')
+    buyer = Buyer.objects.filter(user=request.user).first()
 
-
-def signup_view(request):
     if request.method == 'POST':
-        form = BuyerSignUpForm(request.POST)
+        form = BuyerForm(request.POST, instance=buyer)
         if form.is_valid():
-            user = form.save()
-            buyer_group, created = Group.objects.get_or_create(name='buyer')
-            user.groups.add(buyer_group)
-            return redirect('login')  # or redirect to apartment list
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect('profile')
     else:
-        form = BuyerSignUpForm()
-    return render(request, 'users/signup.html', {'form': form})
+        form = BuyerForm(instance=buyer)
+
+    return render(request, 'users/profile.html', {'form': form})

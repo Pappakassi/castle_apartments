@@ -1,7 +1,20 @@
-<!-- templates/_navigation.html -->
-<nav style="margin-top: 10px;">
+{% load static %}
+
+<nav style="margin-top: 10px; display: flex; align-items: center; gap: 1rem;">
     <a href="/">Home</a>
+
     {% if user.is_authenticated %}
+        <!-- Profile Picture or Fallback -->
+        <div class="avatar" style="
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-image: url('{% if user.buyer.profile_image %}{{ user.buyer.profile_image.url }}{% else %}{% static 'images/profile_fallback.png' %}{% endif %}');
+            background-size: cover;
+            background-position: center;
+        "></div>
+
+        <!-- Logout Form -->
         <form method="post" action="{% url 'logout' %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none; cursor: pointer; color: blue; text-decoration: underline;">

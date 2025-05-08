@@ -3,8 +3,13 @@
     <a href="{% url 'apartment_detail' apt.id %}">
         <img src="{{ apt.image|default:'https://placehold.co/300x200?text=No+Image' }}" alt="{{ apt.title }}" style="width:300px;">
     </a>
-    <p><strong>Address:</strong> {{ apt.address }}</p>
-    <p><strong>Price:</strong> ISK {{ apt.listing_price|floatformat:0 }}</p>
-    <p><strong>Status:</strong> {% if apt.is_sold %}SOLD{% else %}For Sale{% endif %}</p>
+    <h5 class="card-title"><strong>Address:</strong> {{ apt.address }}</h5>
+    <p class="card-text"><strong>Price:</strong> ISK {{ apt.listing_price|floatformat:0 }}</p>
+    <p class="card-text"><strong>Status:</strong> {% if apt.is_sold %}SOLD{% else %}For Sale{% endif %}</p>
     <p>{{ apt.description }}</p>
+    <a class="btn" href="{% url 'apartment_detail' apt.id %}"
+                   style="display:inline-block; padding:8px 12px; background:#2B1B12; color:white; text-decoration:none; border-radius:4px;">
+                    View Details
+                </a>
+
 </div>

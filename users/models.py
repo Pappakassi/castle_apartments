@@ -1,19 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
+from apartments.models import Apartment
 
-# Create your models here.
+class Buyer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    profile_image = models.TextField(max_length=9999, blank=True)
+    favorites = models.ManyToManyField(Apartment, related_name='favorited_by', blank=True)
 
-
-#pseudokóði frá Árna
-# class Roles(models.Model):
-#     role = models.CharField(max_length=50)
-#
-#
-# class User(models.Model):
-#     email = models.EmailField()
-#     password = models.CharField(max_length=50)
-#     name = models.CharField(max_length=50)
-#     role = models.ForeignKey(Roles)
-
-
-
-    #þarf primary key?
+    def __str__(self):
+        return f"{self.name} ({self.user.username})"
