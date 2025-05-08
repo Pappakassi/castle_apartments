@@ -9,18 +9,15 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save() #þetta vistar notandann
             return redirect('login')  # or any success page
     else:
-        form = UserCreationForm()
+        form = UserCreationForm() #þetta er innbyggt í django
     return render(request, 'users/register.html', {'form': form})
 
 def profile(request):
     return render(request, template_name='users/profile.html')
 
-
-def test_view(request):
-    return HttpResponse("Users app works.")
 
 def signup_view(request):
     if request.method == 'POST':

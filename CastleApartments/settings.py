@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Your apps
-    'apartments',
-    'users',
+    'users.apps.UsersConfig',
+    'apartments.apps.ApartmentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +136,12 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/user/profile'
+LOGIN_REDIRECT_URL = '/users/profile' #þessar tvær breytur stýra því vhert þú ferð eftir login
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = ''

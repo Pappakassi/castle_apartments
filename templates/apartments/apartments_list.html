@@ -4,10 +4,21 @@
 
 {% block content %}
     <h2>Available Properties</h2>
-    <a href="{% url 'create_apartment' %}" class="btn btn-primary" style="margin-bottom: 20px;">
+
+    <!-- 🔍 Search input and button -->
+    <div class="input-group mb-3">
+      <input type="search" id="search-value" class="form-control" placeholder="Enter search...">
+      <button id="search-icon" class="btn btn-outline-primary" type="button">Search</button>
+    </div>
+
+    <a href="{% url 'create_apartment' %}" class="btn btn-primary mb-3">
       + Create New Apartment
     </a>
-    {% for apt in apartments %}
-        {% include 'apartments/_single_apartment.html' %}
-    {% endfor %}
+
+    <!-- 🔄 Results container -->
+    <div id="apartment-results">
+        {% for apt in apartments %}
+            {% include 'apartments/_single_apartment.html' %}
+        {% endfor %}
+    </div>
 {% endblock %}

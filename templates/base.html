@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,21 +6,10 @@
     <title>{% block title %}My Real Estate Site{% endblock %}</title>
 </head>
 <body>
-    {% include "_navigation.html" %}
     <!-- 🔝 Header -->
     <header style="background:#eee; padding:10px;">
         <h1>🏰 CASTLE Properties</h1>
-        <nav>
-            <a href="/">Home</a>
-            <!-- Add more nav links here -->
-            {% if user.is_authenticated %}
-                <span>Welcome, {{ user.username }}!</span>
-                <a href="{% url 'logout' %}">Logout</a>
-            {% else %}
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'signup' %}">Sign Up</a>
-            {% endif %}
-        </nav>
+        {% include "_navigation.html" %}
     </header>
 
     <!-- 🧠 Main content -->
@@ -31,5 +21,7 @@
     <footer style="background:#eee; padding:10px; margin-top:20px;">
         <p>&copy; 2025 Castle Properties. All rights reserved.</p>
     </footer>
+
+    <script src="{% static 'js/apartment_filter.js' %}"></script>
 </body>
 </html>
