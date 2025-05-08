@@ -5,7 +5,7 @@
 {% block content %}
     <h2>{{ apartment.title }}</h2>
 
-    <img src="https://placehold.co/600x400?text=House+Detail" alt="{{ apartment.title }}" style="width:600px; margin-bottom:20px;">
+    <img src="{% static "images/apartment.jpg" %}" alt="{{ apartment.title }}" style="width:600px; margin-bottom:20px;">
 
     <p><strong>Address:</strong> {{ apartment.address }}</p>
     <p><strong>Price:</strong> ISK {{ apartment.price|floatformat:0 }}</p>

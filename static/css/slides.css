@@ -1,0 +1,18 @@
+/* In your main.css */
+.custom-carousel {
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.custom-carousel .carousel-item img {
+    object-fit: cover;
+    object-position: bottom;
+    height: 400px;
+}
+
+.carousel-caption h5 {
+    color: black;
+}
+.carousel-caption p {
+    color: black;
+}

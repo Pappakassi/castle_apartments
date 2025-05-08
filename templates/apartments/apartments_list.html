@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Properties for Sale{% endblock %}
+{% block title %}Apartments for Sale{% endblock %}
 
 {% block content %}
-    <h2>Available Properties</h2>
-    {% for apt in apartments %}
-        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-            <h3>{{ apt.title }}</h3>
-            <a href="{% url 'apartment_detail' apt.id %}">
-                <img src="https://placehold.co/300x200?text=House" alt="House" style="width:300px;">
-            </a>
-            <p><strong>Address:</strong> {{ apt.address }}</p>
-            <p><strong>Price:</strong> ISK {{ apt.price|floatformat:0 }}</p>
-            <p><strong>Status:</strong> {% if apt.is_sold %}SOLD{% else %}For Sale{% endif %}</p>
-            <p>{{ apt.description }}</p>
-        </div>
-    {% endfor %}
+    <section class="container py-5">
+        <h2>Available Apartments</h2>
+    </section>
+    <section class="grid-3">
+        {% for apt in apartments %}
+
+            <div class="card">
+              <img src="{% static "images/apartment.jpg" %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ apt.address }}</h5>
+                <p class="card-text">{{ apt.description }}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">kr. {{ apt.price}}</li>
+                    {% if apt.is_sold == True %}
+                        <li class="list-group-item">Sold</li>
+                    {% else %}
+                        <li class="list-group-item">For Sale</li>
+                    {% endif %}
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link">Details</a>
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
 {% endblock %}

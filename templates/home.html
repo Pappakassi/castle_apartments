@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="cards">
+
+{% include "_slides.html" %}
+
+<div class="grid-3">
     {% for apt in apartments %}
-    <div class="card">
-        <img src="https://placehold.co/600x400?text={{ apt.title|urlencode }}" alt="{{ apt.title }}">
+    <div class="cards">
+        <img src="https://placehold.co/300x200?text={{ apt.title|urlencode }}" alt="{{ apt.title }}">
         <div class="card-body">
-            <h2>{{ apt.address }}</h2>
-            <p><strong>Rooms:</strong> {{ apt.rooms }}</p>
-            <p><strong>Size:</strong> {{ apt.size }} m²</p>
-            <p><strong>Price:</strong> {{ apt.price|floatformat:0 }} kr.</p>
+            <h5 class="card-title">{{ apt.address }}</h5>
+            <p class="card-text"><strong>Rooms:</strong> {{ apt.rooms }}</p>
+            <p class="card-text"><strong>Size:</strong> {{ apt.size }} m²</p>
+            <p class="card-text"><strong>Price:</strong> {{ apt.price|floatformat:0 }} kr.</p>
             <a class="btn" href="{% url 'apartment_detail' apt.id %}">Detail</a>
         </div>
     </div>
