@@ -18,6 +18,11 @@
         </li>
       </ul>
         {% if user.is_authenticated %}
+            <!-- Profile Picture or Fallback -->
+            <!-- Move avatar to the right -->
+            <div class="avatar" style="background-image: url('{% if user.buyer.profile_image %}{{ user.buyer.profile_image }}{% else %}{% static 'images/profile_fallback.png' %}{% endif %}');"></div>
+
+            <!-- Logout Form -->
             <form method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none; cursor: pointer; color: blue; text-decoration: underline;">
