@@ -15,8 +15,8 @@
       + Create New Apartment
     </a>
 
-    <!-- 🔄 Results container -->
-    <div id="apartment-results" class="grid-3">
+    <!-- Apartment grid -->
+    <div id="apartment-results" class="grid-card">
         {% for apt in apartments %}
             {% include 'apartments/_single_apartment.html' %}
         {% endfor %}
