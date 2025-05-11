@@ -3,34 +3,63 @@
     width:110px;
     height: 40px;
 }
-
+section, .bg-body-tertiary{
+    background-color: #FEF7F2;
+}
+#section-nav{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+section{
+    padding-top:20px;
+}
+.top-section {
+    width: 100vw !important;
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+.carousel {
+    margin: 0px 4%;
+}
 .card {
     font-family: Montserrat !important;
     background: #DDC7BB !important;
-    width: 100% !important;
+    /*
+    width: 18rem; !important;
     padding: 0px !important;
     margin: 0px !important;
     max-width: 600px !important;
     border-radius: 0.2rem;
     box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
-    font-family: Lato, Arial, sans-serif;
+    */
+}
+.card-apartments {
+    font-family: Montserrat !important;
+    background: #DDC7BB !important;
+    width: 18rem; !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    max-width: 600px !important;
+    border-radius: 0.2rem;
+    box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
 }
 .card img {
-    height: 250px;
+    height: 250px !important;
     object-fit: cover;
 }
 .card-body{
     font-family: Montserrat !important;
     color: #2B1B12 !important;
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 800;
 }
-.card-body a{
+.card .btn{
     border-radius: 1.5rem;
 
 }
+.grin-card {
+    gap: 20px;
+}
 .card-title {
-    font-size: 1.7rem;
     font-weight: 800;
     word-wrap: break-word;
     padding-bottom: 10px;
@@ -68,15 +97,8 @@
 .nav-link {
     margin: 10px 10px;
 }
-section, .bg-body-tertiary{
-    background-color: #FEF7F2;
-}
-section {
-    padding-bottom: 30px;
-}
+
 .avatar {
-
-
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -88,4 +110,12 @@ section {
 
 #fav-location {
     height: 2vmin !important;
+}
+.btn{
+    display:inline-block !important;
+    padding:8px 12px !important;
+    background:#2B1B12 !important;
+    color:white !important;
+    text-decoration:none !important;
+    border-radius:4px !important;
 }

@@ -1,6 +1,10 @@
 {% load static %}
 <div id="carouselExampleCaptions" class="carousel slide custom-carousel" data-bs-ride="carousel">
   <div class="carousel-indicators">
+    {% for apt in apartments %}
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="{% title %}"></button>
+      {% include 'apartments/_single_apartment.html' %}
+    {% endfor %}
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
