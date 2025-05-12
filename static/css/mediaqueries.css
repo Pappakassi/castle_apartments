@@ -9,6 +9,9 @@
     .card-title {
         font-size: 1em;
     }
+    .carousel {
+        margin: 0px 10rem !important;
+    }
 
 }
 
@@ -23,6 +26,9 @@
     .card-title {
         font-size: 1em;
     }
+    .carousel {
+        margin: 0px 10rem !important;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -34,5 +40,8 @@
     }
     .card-title {
         font-size: 1em;
+    }
+    .carousel {
+        margin: 0px 10rem !important;
     }
 }

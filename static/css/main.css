@@ -1,4 +1,7 @@
 {% load static %}
+body{
+    background-color: #FEF7F2;
+}
 .logo {
     width:110px;
     height: 40px;
@@ -11,16 +14,15 @@ section, .bg-body-tertiary{
     padding-bottom: 0px;
 }
 section{
-    padding-top:20px;
+    padding-top:30px;
+    padding-bottom: 30px;
 }
 .top-section {
     width: 100vw !important;
     margin-left: 50% !important;
     transform: translateX(-50%) !important;
 }
-.carousel {
-    margin: 0px 4%;
-}
+
 .card {
     font-family: Montserrat !important;
     background: #DDC7BB !important;
@@ -32,6 +34,10 @@ section{
     border-radius: 0.2rem;
     box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
     */
+}
+.card:hover {
+    transform: scale(1.04);
+
 }
 .card-apartments {
     font-family: Montserrat !important;
@@ -51,6 +57,9 @@ section{
     font-family: Montserrat !important;
     color: #2B1B12 !important;
     font-weight: 800;
+}
+.mb-5{
+    margin-bottom: 1rem !important;
 }
 .card .btn{
     border-radius: 1.5rem;
@@ -102,7 +111,6 @@ section{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-image: url('{% if user.buyer.profile_image %}{{ user.buyer.profile_image }}{% else %}{% static 'images/profile_fallback.png' %}{% endif %}');
     background-size: cover;
     background-position: center;
     margin-left: auto;

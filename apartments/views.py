@@ -4,6 +4,9 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from offers.models import PurchaseOffer
 
+from django.http import JsonResponse
+from .models import Apartment
+from django.db.models import Q
 
 
 
@@ -52,7 +55,39 @@ def create_apartment(request):
     return render(request, 'apartments/create_apartment.html', {'form': form})
 
 def apartments_list(request):
-    if 'search_filter' in request.GET: #ef það er search filter í get request'unni þá viljum við gera eitthvað
+    apartments = Apartment.objects.all()
+
+    # Search by street name (case-insensitive)
+    search = request.GET.get('search_filter')
+    if search:
+        apartments = apartments.filter(address__icontains=search)
+
+    # Filter by postal code
+    postal_code = request.GET.get('postal_code')
+    if postal_code:
+        apartments = apartments.filter(postal_code=postal_code)
+
+    # Filter by type (apartment, villa, etc.)
+    apt_type = request.GET.get('type')
+    if apt_type:
+        apartments = apartments.filter(type__iexact=apt_type)
+
+    # Filter by price range
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+    if min_price:
+        apartments = apartments.filter(listing_price__gte=min_price)
+    if max_price:
+        apartments = apartments.filter(listing_price__lte=max_price)
+
+    # Order by price or name
+    order_by = request.GET.get('order_by')
+    if order_by in ['listing_price', 'title']:
+        apartments = apartments.order_by(order_by)
+
+
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({
             'data': [{
                 'id': apt.id,
@@ -64,11 +99,13 @@ def apartments_list(request):
                 'type': apt.type,
                 'listing_price': apt.listing_price,
                 'image': apt.image,
-            } for apt in Apartment.objects.filter(title__icontains=request.GET['search_filter']).order_by('title')]
+            } for apt in apartments]
         })
 
-    apartments = Apartment.objects.all()
-    return render(request, 'apartments/apartments_list.html', {'apartments': apartments})
+    return render(request, 'apartments/apartments_list.html', {
+        'apartments': apartments
+    })
+
 
 def home_view(request):
     featured_apartments = Apartment.objects.all()[:3] #sækir fyrstu þrjár íbúðirnar

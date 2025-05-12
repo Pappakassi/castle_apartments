@@ -1,34 +1,42 @@
 document.addEventListener('DOMContentLoaded', function () {
-  function registerSearchButtonHandler() {
-    const searchButton = document.getElementById('search-icon');
-    const searchValueElement = document.getElementById('search-value');
-    const apartmentsPlaceholder = document.getElementById('apartment-results');
+  document.getElementById('search-icon').addEventListener('click', async function () {
+    const params = new URLSearchParams({
+      search_filter: document.getElementById('search-value').value,
+      postal_code: document.getElementById('postal-code').value,
+      type: document.getElementById('type').value,
+      min_price: document.getElementById('price-from').value,
+      max_price: document.getElementById('price-to').value,
+      order_by: document.getElementById('order-by').value,
+    });
 
-    searchButton.addEventListener('click', async function () {
-      const value = searchValueElement.value;
-
-      const response = await fetch(`/apartments/?search_filter=${encodeURIComponent(value)}`);
-      if (response.ok) {
-        const json = await response.json();
-        const apartments = json.data.map(apartment => `
-          <div class="card text-center mb-3" style="width: 18rem;">
-            <div class="image" style="background-image: url(${apartment.image}); height: 180px; background-size: cover;"></div>
-            <div class="card-body">
-              <h5 class="card-title">${apartment.title}</h5>
-              <h6><span class="badge text-bg-secondary">${apartment.type}</span></h6>
-              <p class="lead">${apartment.listing_price} ISK</p>
-              <p>${apartment.city}, ${apartment.postal_code}</p>
-              <a href="/apartments/${apartment.id}" class="btn btn-primary">See more</a>
-              <a href="/apartments/${apartment.id}/edit/" class="btn btn-secondary">Update</a>
-              <a href="/apartments/${apartment.id}/delete/" class="btn btn-danger">Delete</a>
-            </div>
-          </div>
-        `);
-
-        apartmentsPlaceholder.innerHTML = apartments.join('');
+    const response = await fetch(`/apartments/?${params.toString()}`, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
       }
     });
-  }
 
-  registerSearchButtonHandler();
+    const container = document.getElementById("apartment-results");
+
+    if (response.ok) {
+      const json = await response.json();
+
+      if (json.data.length === 0) {
+        container.innerHTML = "<p>No apartments match the filters.</p>";
+      } else {
+        container.innerHTML = json.data.map(apt => `
+          <div class="card mb-3" style="width: 18rem;">
+            <img src="${apt.image || 'https://placehold.co/300x200?text=No+Image'}" class="card-img-top" alt="${apt.title}">
+            <div class="card-body">
+              <h5 class="card-title">${apt.title}</h5>
+              <p class="card-text">${apt.address}, ${apt.city} ${apt.postal_code}</p>
+              <p class="card-text">${apt.listing_price} ISK</p>
+              <a href="/apartments/${apt.id}" class="btn btn-primary">Details</a>
+            </div>
+          </div>
+        `).join('');
+      }
+    } else {
+      container.innerHTML = "<p>Something went wrong with the search request.</p>";
+    }
+  });
 });

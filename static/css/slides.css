@@ -6,7 +6,7 @@
 
 .custom-carousel .carousel-item img {
     object-fit: cover;
-    object-position: bottom;
+    object-position: center;
     height: 400px;
 }
 
@@ -15,4 +15,10 @@
 }
 .carousel-caption p {
     color: black;
+}
+.carousel-control-prev {
+    justify-content: flex-start !important;
+}
+.carousel-control-next {
+    justify-content: flex-end !important;
 }
