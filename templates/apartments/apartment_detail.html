@@ -3,12 +3,9 @@
 {% block title %}{{ apartment.title }} - Details{% endblock %}
 
 {% block content %}
-    <section>
-        {% include 'apartments/_slides.html' %}
-    </section>
-    <div class="container">
     <h2>{{ apartment.title }}</h2>
 
+    <img src="{{ apartment.image|default:'https://placehold.co/600x400?text=No+Image' }}" alt="{{ apartment.title }}" style="width:600px; margin-bottom:20px;">
 
     <h5 class="card-title"><strong>Address:</strong> {{ apartment.address }}</h5>
     <p class="card-title"><strong>Price:</strong> ISK {{ apartment.listing_price|floatformat:0 }}</p>
@@ -70,11 +67,19 @@
 {% endif %}
 
 {% if user.is_authenticated and not apartment.is_sold %}
-  {% if offer_exists %}
-    <button class="btn btn-secondary" disabled title="You already made an offer.">Offer Already Made</button>
+  {% if offer %}
+    <a class="btn btn-warning" href="{% url 'submit_offer' apartment.id %}">
+      Resubmit a Purchase Offer
+    </a>
+    <span class="badge bg-info text-dark ms-2">Status: {{ offer.status }}</span>
   {% else %}
-    <a class="btn btn-success" href="{% url 'submit_offer' apartment.id %}">Submit Purchase Offer</a>
+    <a class="btn btn-success" href="{% url 'submit_offer' apartment.id %}">
+      Submit a Purchase Offer
+    </a>
   {% endif %}
+{% elif not user.is_authenticated and not apartment.is_sold %}
+  <p>Please <a href="{% url 'login' %}">log in</a> to submit a purchase offer.</p>
 {% endif %}
-</div>
+
+
 {% endblock %}

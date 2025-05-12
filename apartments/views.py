@@ -85,9 +85,8 @@ def apartments_list(request):
     if order_by in ['listing_price', 'title']:
         apartments = apartments.order_by(order_by)
 
-
-
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.headers.get(
+            'accept') == 'application/json':
         return JsonResponse({
             'data': [{
                 'id': apt.id,
@@ -118,11 +117,11 @@ def home_view(request):
 def apartment_detail(request, pk):
     apartment = get_object_or_404(Apartment, pk=pk)
 
-    offer_exists = False
+    offer = None
     if request.user.is_authenticated:
-        offer_exists = PurchaseOffer.objects.filter(apartment=apartment, buyer=request.user).exists()
+        offer = PurchaseOffer.objects.filter(apartment=apartment, buyer=request.user).first()
 
     return render(request, 'apartments/apartment_detail.html', {
         'apartment': apartment,
-        'offer_exists': offer_exists,
+        'offer': offer,  # send full offer object (or None)
     })
