@@ -1,0 +1,60 @@
+/* Apartment Address */
+.apt-address {
+    color: #2B1B12;
+    font-family: Montserrat;
+    font-size: 27px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+/* Apartment Price */
+.apt-price {
+    color: #4F3527;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.property-card {
+  background-color: #fff5f0;
+  padding: 20px;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+}
+
+.property-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.property-location {
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transform: translateX(-50px);
+}
+.property-location img {
+    max-width: 2rem;
+}
+
+.property-price {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.property-info {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.property-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
