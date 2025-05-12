@@ -22,3 +22,13 @@
 .carousel-control-next {
     justify-content: flex-end !important;
 }
+
+/* Image indicators in the slide show */
+.carousel-indicators button {
+  opacity: 0.6;
+  border-radius: 4px;
+}
+.carousel-indicators .active {
+  opacity: 1;
+  border: 2px solid #007bff;
+}
