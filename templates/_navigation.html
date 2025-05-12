@@ -1,28 +1,38 @@
 {% load static %}
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'images/castle-apartments-logo.png' %}" class="logo" alt="Castle Apartments Home" />
+    </a>
+    <button type="button" class="btn btn-dark">Sign up / Log In</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/apartments">Apartments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'offer_list' %}">Offers</a>
+        </li>
+      </ul>
+        {% if user.is_authenticated %}
+            <!-- Profile Picture or Fallback -->
+            <!-- Move avatar to the right -->
+            <div class="avatar" style="background-image: url('{% if user.buyer.profile_image %}{{ user.buyer.profile_image }}{% else %}{% static 'images/profile_fallback.png' %}{% endif %}');"></div>
 
-<nav style="margin-top: 10px; display: flex; align-items: center; gap: 1rem;">
-    <a href="/">Home</a>
-
-    {% if user.is_authenticated %}
-        <!-- Profile Picture or Fallback -->
-        <div class="avatar" style="
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-image: url('{% if user.buyer.profile_image %}{{ user.buyer.profile_image.url }}{% else %}{% static 'images/profile_fallback.png' %}{% endif %}');
-            background-size: cover;
-            background-position: center;
-        "></div>
-
-        <!-- Logout Form -->
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none; cursor: pointer; color: blue; text-decoration: underline;">
-                Logout ({{ user.username }})
-            </button>
-        </form>
-    {% else %}
-        <a href="{% url 'register' %}">Register</a>
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+            <!-- Logout Form -->
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none; cursor: pointer; color: blue; text-decoration: underline;">
+                    Logout ({{ user.username }})
+                </button>
+            </form>
+        {% else %}
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+  </div>
 </nav>

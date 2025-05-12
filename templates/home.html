@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="grid-3">
+<section class="top-section">
+    {% include "_slides.html" %}
+</section>
+<div class="grid-card">
     {% for apt in apartments %}
-    <div class="card" style="border:1px solid #ccc; padding:16px; margin:16px; max-width:700px;">
+    <div class="card">
         <img src="{{ apt.image|default:'https://placehold.co/600x400?text=No+Image' }}"
              alt="{{ apt.title }}"
              style="width:100%; max-width:600px; height:auto; display:block; margin:0 auto 16px auto;">
