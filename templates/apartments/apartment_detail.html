@@ -3,9 +3,12 @@
 {% block title %}{{ apartment.title }} - Details{% endblock %}
 
 {% block content %}
+    <section>
+        {% include 'apartments/_slides.html' %}
+    </section>
+    <div class="container">
     <h2>{{ apartment.title }}</h2>
 
-    <img src="{{ apartment.image|default:'https://placehold.co/600x400?text=No+Image' }}" alt="{{ apartment.title }}" style="width:600px; margin-bottom:20px;">
 
     <h5 class="card-title"><strong>Address:</strong> {{ apartment.address }}</h5>
     <p class="card-title"><strong>Price:</strong> ISK {{ apartment.listing_price|floatformat:0 }}</p>
@@ -73,5 +76,5 @@
     <a class="btn btn-success" href="{% url 'submit_offer' apartment.id %}">Submit Purchase Offer</a>
   {% endif %}
 {% endif %}
-
+</div>
 {% endblock %}
