@@ -5,6 +5,11 @@ from apartments.models import Apartment
 from .forms import PurchaseOfferForm
 from django.shortcuts import render
 from offers.models import PurchaseOffer
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def finalize_offer(request, offer_id):
+    return render(request, 'offers/finalize_offer.html')
 
 @login_required
 def submit_offer(request, apartment_id):

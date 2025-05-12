@@ -24,11 +24,12 @@
           </td>
           <td>{{ offer.submitted_at|date:"F j, Y" }}</td>
           <td>{{ offer.expiration_date }}</td>
-          <td>{{ offer.status }}</td>
+{#          <td>{{ offer.status }}</td>#}
+            <td>{{ offer.get_status_display }}</td>
           <td>{{ offer.apartment.seller.name }}</td>
           <td>ISK {{ offer.price|floatformat:0 }}</td>
           <td>
-            {% if offer.status == "Accepted" or offer.status == "Contingent" %}
+            {% if offer.status == "accepted" or offer.status == "contingent" %}
               <a href="{% url 'finalize_offer' offer.id %}">Finalize</a>
             {% else %}
               -

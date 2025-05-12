@@ -23,10 +23,12 @@ from apartments.views import home_view  # 👈 Import the view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('apartments/', include('apartments.urls')),
-    path('apartments/finalize', include('apartments.urls')),
+    #path('apartments/finalize', include('apartments.urls')),
     path('', home_view, name='home'),  # 👈 Root path shows "Hello, World!"
     path('accounts/', include('django.contrib.auth.urls')),  # ✅ Add this line
     path('users/', include('users.urls')),
+    path('offers/', include('offers.urls')),  # ✅ This actually registers finalize_offer
+
 ]
 
 
