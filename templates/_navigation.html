@@ -14,7 +14,7 @@
           <a class="nav-link" href="/apartments">Apartments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Offers</a>
+          <a class="nav-link" href="{% url 'offer_list' %}">Offers</a>
         </li>
       </ul>
         {% if user.is_authenticated %}

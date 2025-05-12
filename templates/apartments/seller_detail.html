@@ -1,0 +1,39 @@
+<!-- Cover Image -->
+{% if seller.cover_image %}
+    <img src="{{ seller.cover_image }}" alt="Cover Image" style="width:100%; height:auto;" />
+{% endif %}
+
+<!-- Seller Info -->
+<h1>{{ seller.name }}</h1>
+<p><strong>Type:</strong> {{ seller.get_seller_type_display }}</p>
+
+{% if seller.seller_type == "agency" %}
+    <p><strong>Address:</strong> {{ seller.address }}</p>
+{% endif %}
+
+<p><strong>Street:</strong> {{ seller.street_name }}</p>
+<p><strong>City:</strong> {{ seller.city }}</p>
+<p><strong>Postal Code:</strong> {{ seller.postal_code }}</p>
+
+{% if seller.logo %}
+    <img src="{{ seller.logo }}" alt="Logo" style="max-width:150px;" />
+{% endif %}
+
+<p><strong>About:</strong> {{ seller.bio }}</p>
+
+<hr>
+
+<!-- Properties for Sale -->
+<h2>Properties on Sale</h2>
+<ul>
+    {% for apt in apartments %}
+        <li style="margin-bottom: 20px;">
+            <a href="{% url 'apartment_detail' apt.pk %}">
+                <img src="{{ apt.image }}" alt="{{ apt.title }}" style="width:150px; height:auto;" />
+                <p>{{ apt.address }}</p>
+            </a>
+        </li>
+    {% empty %}
+        <li>No properties currently on sale by this seller.</li>
+    {% endfor %}
+</ul>

@@ -42,4 +42,36 @@
     <a href="{% url 'apartments_list' %}" style="display:inline-block; margin-top:20px; padding:8px 16px; background-color:#2B1B12; color:white; text-decoration:none; border-radius:4px;">
         ← Back to All Apartments
     </a>
+
+<!-- Additional Images Gallery -->
+<h3>Gallery</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  {% for image in apartment.images.all %}
+    <div>
+      <img src="{{ image.image_url }}" alt="{{ image.caption }}" style="width: 200px; height: auto;">
+      <p>{{ image.caption }}</p>
+    </div>
+  {% empty %}
+    <p>No additional images available.</p>
+  {% endfor %}
+</div>
+
+
+{% if apartment.seller %}
+  <p class="card-text">
+    Seller:
+    <a href="{% url 'seller_detail' apartment.seller.id %}">
+      {{ apartment.seller.name }}
+    </a>
+  </p>
+{% endif %}
+
+{% if user.is_authenticated and not apartment.is_sold %}
+  {% if offer_exists %}
+    <button class="btn btn-secondary" disabled title="You already made an offer.">Offer Already Made</button>
+  {% else %}
+    <a class="btn btn-success" href="{% url 'submit_offer' apartment.id %}">Submit Purchase Offer</a>
+  {% endif %}
+{% endif %}
+
 {% endblock %}
