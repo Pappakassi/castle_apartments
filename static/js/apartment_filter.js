@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const response = await fetch(`/apartments/?${params.toString()}`, {
       headers: {
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json'
       }
     });
 
