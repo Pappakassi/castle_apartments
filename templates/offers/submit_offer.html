@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Submit Offer for {{ apartment.title }}</h2>
+  <h2>
+    {% if resubmitting %}
+      Resubmit Your Offer for "{{ apartment.title }}"
+    {% else %}
+      Submit Offer for "{{ apartment.title }}"
+    {% endif %}
+  </h2>
+
+  {% if resubmitting %}
+    <div class="alert alert-info">
+      You’ve already submitted an offer. You can update and resubmit it here.
+    </div>
+  {% endif %}
 
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit Offer</button>
+    <button type="submit" class="btn btn-primary">
+      {% if resubmitting %}Resubmit Offer{% else %}Submit Offer{% endif %}
+    </button>
   </form>
 {% endblock %}

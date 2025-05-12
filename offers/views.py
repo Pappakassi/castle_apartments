@@ -6,6 +6,8 @@ from .forms import PurchaseOfferForm
 from django.shortcuts import render
 from offers.models import PurchaseOffer
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 
 @login_required
 def finalize_offer(request, offer_id):
@@ -15,25 +17,27 @@ def finalize_offer(request, offer_id):
 def submit_offer(request, apartment_id):
     apartment = get_object_or_404(Apartment, pk=apartment_id)
 
-    # Check if an offer already exists by this user
-    existing_offer = PurchaseOffer.objects.filter(apartment=apartment, buyer=request.user).first()
-    if existing_offer:
-        messages.warning(request, "You have already submitted an offer for this apartment.")
-        return redirect('apartment_detail', apartment.id)
+    # Try to get an existing offer from this user for this apartment
+    offer = PurchaseOffer.objects.filter(apartment=apartment, buyer=request.user).first()
 
     if request.method == 'POST':
-        form = PurchaseOfferForm(request.POST)
+        # If offer exists, update it; otherwise, create a new one
+        form = PurchaseOfferForm(request.POST, instance=offer)
         if form.is_valid():
-            offer = form.save(commit=False)
-            offer.apartment = apartment
-            offer.buyer = request.user
-            offer.status = 'pending'
-            offer.save()
-            return render(request, 'offers/offer_success.html', {'apartment': apartment})
+            new_offer = form.save(commit=False)
+            new_offer.apartment = apartment
+            new_offer.buyer = request.user
+            new_offer.save()
+            messages.success(request, 'Your purchase offer has been submitted successfully.')
+            return redirect('apartment_detail', pk=apartment.pk)
     else:
-        form = PurchaseOfferForm()
+        form = PurchaseOfferForm(instance=offer)  # Pre-fill form with existing offer if any
 
-    return render(request, 'offers/submit_offer.html', {'form': form, 'apartment': apartment})
+    return render(request, 'offers/submit_offer.html', {
+        'form': form,
+        'apartment': apartment,
+        'resubmitting': offer is not None,  # optional: to customize UI
+    })
 
 
 def offer_list(request):
