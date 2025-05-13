@@ -17,9 +17,6 @@
       {% for img in apartment.images.all %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <img src="{{ img.image_url }}" class="d-block w-100 rounded-4" alt="{{ img.caption }}">
-          <div class="carousel-caption d-none d-md-block">
-            <p>{{ img.caption }}</p>
-          </div>
         </div>
       {% endfor %}
     </div>

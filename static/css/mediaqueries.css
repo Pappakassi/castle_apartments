@@ -1,35 +1,38 @@
 
 .custom-carousel {
     margin: 0 auto;
-    width: 80%;
-    height: 45em;
+    width: 60%;
+    height: 30em;
     max-width: 100%; /* fallback default */
     transition: width 0.3s ease;
 }
 
 .carousel-item img {
   width: 100%;
-  height: 45em;
+  height: 30em;
   object-fit: cover;
   max-height: 80vh; /* Limits height on large screens */
 }
 
 /* Carousel thumbnail indicators */
 .carousel-thumb {
-  width: 60px;
-  height: 40px;
-  background-size: cover;
-  background-position: center;
-  border: 2px solid white;
-  margin: 2px;
-  opacity: 0.6;
-  border-radius: 4px;
-  cursor: pointer;
+    aspect-ratio: 16 / 9 !important;
+    width: 100px !important;
+    overflow: hidden !important;
+    height: auto !important;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid white;
+    margin: 2px;
+    opacity: 0.6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: width 0.20s ease-in !important;
 }
 
 .carousel-thumb.active {
-  opacity: 1;
-  border-color: #007bff;
+    opacity: 1;
+    border-color: #007bff;
 }
 
 

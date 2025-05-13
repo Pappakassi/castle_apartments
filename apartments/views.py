@@ -56,6 +56,7 @@ def create_apartment(request):
 
 def apartments_list(request):
     apartments = Apartment.objects.all()
+    search = request.GET.get('search_filter')
 
     # Search by street name (case-insensitive)
     search = request.GET.get('search_filter')

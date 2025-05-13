@@ -3,19 +3,19 @@
     <!-- Street name -->
     <div class="col-md-2">
       <label for="search-value" class="form-label">Search street</label>
-      <input type="search" id="search-value" class="form-control" placeholder="e.g. Laugavegur">
+      <input type="search" id="search-value" name="search_filter" class="form-control" placeholder="e.g. Laugavegur">
     </div>
 
     <!-- Postal code -->
     <div class="col-md-2">
         <label for="postal-code" class="form-label">Postal Code</label>
-        <input type="number" id="postal-code" class="form-select" placeholder="Postal Code">
+        <input type="number" id="postal-code" name="postal_code" class="form-select" placeholder="Postal Code">
     </div>
 
     <!-- Type -->
     <div class="col-md-2">
       <label for="type" class="form-label">Type</label>
-      <select id="type" class="form-select">
+      <select id="type" class="form-select" name="type">
         <option value="">All</option>
         <option value="Villa">Villa</option>
         <option value="House">House</option>
@@ -27,19 +27,19 @@
     <!-- Price from -->
     <div class="col-md-2">
       <label for="price-from" class="form-label">Min Price</label>
-      <input type="number" id="price-from" class="form-control" placeholder="ISK">
+      <input type="number" id="price-from" name="min_price" class="form-control" placeholder="ISK">
     </div>
 
     <!-- Price to -->
     <div class="col-md-2">
       <label for="price-to" class="form-label">Max Price</label>
-      <input type="number" id="price-to" class="form-control" placeholder="ISK">
+      <input type="number" id="price-to" name="max_price" class="form-control" placeholder="ISK">
     </div>
 
     <!-- Order by -->
     <div class="col-md-2">
       <label for="order-by" class="form-label">Order By</label>
-      <select id="order-by" class="form-select">
+      <select id="order-by" class="form-select" name="order-by">
         <option value="">Default</option>
         <option value="listing_price">Price</option>
         <option value="title">Name</option>

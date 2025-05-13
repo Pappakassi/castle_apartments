@@ -1,27 +1,36 @@
 {% load static %}
 <div id="carouselExampleCaptions" class="carousel slide custom-carousel rounded-4" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    {% for img in apartment.images.all %}
-      <button type="button" data-bs-target="#carouselExampleCaptions"
-              data-bs-slide-to="{{ forloop.counter0 }}"
-              class="{% if forloop.first %}active{% endif %}"
-              aria-current="{% if forloop.first %}true{% endif %}"
-              aria-label="Slide {{ forloop.counter }}">
-      </button>
-    {% endfor %}
-  </div>
+      {% for img in apartment.images.all %}
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="{{ forloop.counter0 }}"
+          class="carousel-thumb img-{{ forloop.counter0 }} {% if forloop.first %}active{% endif %}"
+          {% if forloop.first %}aria-current="true"{% endif %}
+          aria-label="Slide {{ forloop.counter }}">
+        </button>
+      {% endfor %}
+    </div>
 
-  <div class="carousel-inner">
-    {% for img in apartment.images.all %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ img.image_url }}" class="d-block w-100" alt="{{ img.caption }}">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>{{ apartment.title }}</h5>
-          <p>{{ img.caption }}</p>
+    <div class="carousel-inner">
+      {% for img in apartment.images.all %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ img.image_url }}" class="d-block w-100 rounded-4" alt="{{ img.caption }}">
+          <div class="carousel-caption d-none d-md-block">
+            <p>{{ img.caption }}</p>
+          </div>
         </div>
-      </div>
-    {% endfor %}
-  </div>
+      {% endfor %}
+    </div>
+
+    <style>
+      {% for img in apartment.images.all %}
+        .img-{{ forloop.counter0 }} {
+          background-image: url('{{ img.image_url }}');
+        }
+      {% endfor %}
+    </style>
 
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -33,5 +42,28 @@
   </button>
 </div>
 
-
-
+<!-- Modal Slideshow - For Full Window Slideshow -->
+<div class="modal fade" id="carouselModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content bg-dark">
+      <div class="modal-body p-0">
+        <div id="modalCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for img in apartment.images.all %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ img.image_url }}" class="d-block w-100" style="max-height: 100vh; object-fit: contain;" alt="{{ img.caption }}">
+              </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
