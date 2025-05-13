@@ -3,10 +3,14 @@
 {% block content %}
   <h2>Create New Apartment</h2>
 
+    {% if user.is_authenticated %}
   <form method="post" action="{% url 'create_apartment' %}">
     {% csrf_token %}
     {{ form.as_p }}
-
     <input type="submit" value="Create" class="btn btn-primary" />
   </form>
+    {% else %}
+    <p>You must be <a href="{% url 'login' %}?next={% url 'create_apartment' %}">logged in</a> to create a new apartment listing.</p>
+  {% endif %}
+
 {% endblock %}

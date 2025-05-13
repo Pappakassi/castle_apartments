@@ -1,39 +1,64 @@
-<!-- Cover Image -->
-{% if seller.cover_image %}
-    <img src="{{ seller.cover_image }}" alt="Cover Image" style="width:100%; height:auto;" />
-{% endif %}
+{% extends "base.html" %}
 
-<!-- Seller Info -->
-<h1>{{ seller.name }}</h1>
-<p><strong>Type:</strong> {{ seller.get_seller_type_display }}</p>
+{% block title %}{{ seller.name }} - Seller Profile{% endblock %}
 
-{% if seller.seller_type == "agency" %}
-    <p><strong>Address:</strong> {{ seller.address }}</p>
-{% endif %}
+{% block content %}
+<div class="container-fluid px-0">
+{#    {% if seller.cover_image %}#}
+        <img src="{{ seller.cover_image }}" alt="Cover Image" style="width:100%; height:300px; object-fit:cover;" />
+{#    {% endif %}#}
+</div>
 
-<p><strong>Street:</strong> {{ seller.street_name }}</p>
-<p><strong>City:</strong> {{ seller.city }}</p>
-<p><strong>Postal Code:</strong> {{ seller.postal_code }}</p>
+<section>
+    <div class="container mt-4">
+        <div class="property-card">
+            <!-- Seller Logo and Name -->
+            <div class="d-flex align-items-center mb-3">
+                {% if seller.logo %}
+                    <img src="{{ seller.logo }}" alt="Logo" style="max-width:100px; height:auto; margin-right:15px;" />
+                {% endif %}
+                <h2 class="mb-0">{{ seller.name }}</h2>
+            </div>
 
-{% if seller.logo %}
-    <img src="{{ seller.logo }}" alt="Logo" style="max-width:150px;" />
-{% endif %}
+            <p><strong>Type:</strong> {{ seller.get_seller_type_display }}</p>
 
-<p><strong>About:</strong> {{ seller.bio }}</p>
+            {% if seller.seller_type == "agency" %}
+                <p><strong>Address:</strong> {{ seller.address }}</p>
+                <p><strong>Street:</strong> {{ seller.street_name }}</p>
+                <p><strong>City:</strong> {{ seller.city }}</p>
+                <p><strong>Postal Code:</strong> {{ seller.postal_code }}</p>
+            {% endif %}
 
-<hr>
+            <div class="property-description mt-3">
+                <strong>About:</strong>
+                <p>{{ seller.bio }}</p>
+            </div>
+        </div>
 
-<!-- Properties for Sale -->
-<h2>Properties on Sale</h2>
-<ul>
-    {% for apt in apartments %}
-        <li style="margin-bottom: 20px;">
-            <a href="{% url 'apartment_detail' apt.pk %}">
-                <img src="{{ apt.image }}" alt="{{ apt.title }}" style="width:150px; height:auto;" />
-                <p>{{ apt.address }}</p>
-            </a>
-        </li>
-    {% empty %}
-        <li>No properties currently on sale by this seller.</li>
-    {% endfor %}
-</ul>
+        <hr class="my-5" />
+
+        <!-- Properties for Sale -->
+        <h3 class="mb-4">Properties on Sale</h3>
+        <div class="row">
+            {% for apt in apartments %}
+                <div class="col-md-4 mb-4">
+                    <a href="{% url 'apartment_detail' apt.pk %}" style="text-decoration: none; color: inherit;">
+                        <div class="card h-100 shadow-sm">
+                            {% if apt.image %}
+                                <img src="{{ apt.image }}" class="card-img-top" alt="{{ apt.title }}" style="height:200px; object-fit:cover;" />
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ apt.address }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <p>This seller currently has no properties on sale.</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'apartments_list' %}" class="btn btn-secondary mt-4">← Back to All Apartments</a>
+    </div>
+</section>
+{% endblock %}

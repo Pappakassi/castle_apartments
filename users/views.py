@@ -8,7 +8,7 @@ from apartments.models import Apartment
 from users.models import Buyer
 from django.contrib.auth.decorators import login_required
 from users.forms.buyer_form import BuyerForm
-
+from django.contrib import messages  # Add this import at the top
 
 
 
@@ -42,17 +42,24 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 @login_required
-def profile(request):
-    buyer = Buyer.objects.filter(user=request.user).first()
+def profile_view(request):
+    buyer = request.user.buyer
+    return render(request, 'users/profile.html', {'buyer': buyer})
 
+@login_required
+def edit_profile(request):
+    buyer = request.user.buyer
     if request.method == 'POST':
         form = BuyerForm(request.POST, instance=buyer)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
+            messages.success(request, 'Profile updated successfully.')
             return redirect('profile')
+        else:
+            messages.error(request, 'Failed to update profile. Please correct the errors.')
     else:
         form = BuyerForm(instance=buyer)
 
-    return render(request, 'users/profile.html', {'form': form})
+    return render(request, 'users/edit_profile.html', {'form': form})

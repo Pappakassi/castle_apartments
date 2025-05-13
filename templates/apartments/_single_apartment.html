@@ -17,6 +17,9 @@
         <p class="card-price"> ISK {{ apt.listing_price|floatformat:0 }}</p>
         <a class="btn btn-primary stretched-link" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</a>
     </div>
+    {% if user.is_authenticated %}
+  <a href="{% url 'update_apartment' apt.id %}" class="btn btn-outline-secondary mt-2">Edit</a>
+{% endif %}
 </div>
 
 <!--
