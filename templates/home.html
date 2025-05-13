@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section>
-    {% include "_slides.html" %}
-</section>
+    <div class="container-fluid px-0">
+        {% include 'apartments/_slides.html' %}
+    </div>
         <!-- Search and Filters -->
     <section class="container-fluid">
         {% include 'apartments/_search_apartment.html' %}

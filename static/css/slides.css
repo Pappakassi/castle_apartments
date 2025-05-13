@@ -1,15 +1,3 @@
-/* In your main.css */
-.custom-carousel {
-    max-height: 400px;
-    overflow: hidden;
-}
-
-.custom-carousel .carousel-item img {
-    object-fit: cover;
-    object-position: center;
-    height: 400px;
-}
-
 .carousel-caption h5 {
     color: black;
 }
