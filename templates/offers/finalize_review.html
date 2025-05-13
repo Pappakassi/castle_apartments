@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Step 3: Review & Confirm</h2>
+  <div class="mb-4">
+    <p><strong>Property:</strong> {{ offer.apartment.title }}</p>
+    <p><strong>Offer Price:</strong> ISK {{ offer.price|floatformat:0 }}</p>
+    <p><strong>Contact Info:</strong> {{ offer.contact_info }}</p>
+    <p><strong>Payment Type:</strong> {{ offer.payment.get_type_display }}</p>
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" name="confirm" class="btn btn-success">Confirm Purchase Offer</button>
+  </form>
+</div>
+{% endblock %}

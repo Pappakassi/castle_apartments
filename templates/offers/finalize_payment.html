@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Step 2: Payment Method</h2>
+  <form method="post">
+    {% csrf_token %}
+    
+    {{ payment_form.as_p }}
+
+    <div id="credit-fields" style="display: none;">
+      <h5>Credit Card Details</h5>
+      {{ credit_form.as_p }}
+    </div>
+
+    <div id="bank-fields" style="display: none;">
+      <h5>Bank Transfer Details</h5>
+      {{ bank_form.as_p }}
+    </div>
+
+    <div id="mortgage-fields" style="display: none;">
+      <h5>Mortgage Details</h5>
+      {{ mortgage_form.as_p }}
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Continue to Review</button>
+  </form>
+</div>
+    <script src="{% static 'js/payment_form_toggle.js' %}"></script>
+{% endblock %}

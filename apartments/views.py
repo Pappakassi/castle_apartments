@@ -9,6 +9,8 @@ from .models import Apartment
 from django.db.models import Q
 from apartments.forms.apartment_create_form import ApartmentCreateForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+
 
 
 
