@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container-fluid px-0">
-        {% include 'apartments/_slides.html' %}
-    </div>
+    <section>
+        {% include '_slides.html' %}
+    </section>
         <!-- Search and Filters -->
     <section class="container-fluid">
-        {% include 'apartments/_search_apartment.html' %}
+        <form action="{% url 'apartments_list' %}" method="get" id="search-form">
+            {% include 'apartments/_search_apartment.html' %}
+        </form>
     </section>
 <div class="container">
     <div class="grid-card">

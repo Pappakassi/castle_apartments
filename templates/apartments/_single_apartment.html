@@ -1,6 +1,6 @@
 {% load static %}
 <div class="card">
-    <img src="{{ apt.image|default:'https://placehold.co/300x200?text=No+Image' }}" class="card-img-top" style="max-height: 300px;" alt="{{ apt.title }}">
+    <img src="{{ apt.image }}" class="card-img-top" style="max-height: 300px;" alt="{{ apt.title }}">
     <div class="card-body">
         <h5 class="card-title">
             <img src="{% static "images/location.png" %}" id="fav-location" />
