@@ -36,7 +36,7 @@
               <td>ISK {{ offer.price|floatformat:0 }}</td>
               <td>
                 {% if offer.status == "accepted" or offer.status == "contingent" %}
-                  <a href="{% url 'finalize_offer' offer.id %}">Finalize</a>
+                  <a href="{% url 'finalize_contact' offer.id %}">Finalize</a>
                 {% else %}
                   -
                 {% endif %}
