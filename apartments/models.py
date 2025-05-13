@@ -49,6 +49,10 @@ class ApartmentImage(models.Model):
     image_url = models.URLField(max_length=500)
     caption = models.CharField(max_length=255, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta: # default ordering
+        ordering = ['image_url']
 
     def __str__(self):
         return f"Image for {self.apartment.title}"
