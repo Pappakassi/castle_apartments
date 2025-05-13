@@ -58,6 +58,9 @@ section{
     color: #2B1B12 !important;
     font-weight: 800;
 }
+.card-title {
+        font-size: 1em;
+}
 .mb-5{
     margin-bottom: 1rem !important;
 }
@@ -65,7 +68,7 @@ section{
     border-radius: 1.5rem;
 
 }
-.grin-card {
+.grid-card {
     gap: 20px;
 }
 .card-title {
