@@ -11,9 +11,12 @@
     <div class="container">
         <h2>Available Properties</h2>
 
-        <a href="{% url 'create_apartment' %}" class="btn btn-primary mb-3">
-          + Create New Apartment
-        </a>
+{% if user.is_authenticated %}
+  <a href="{% url 'create_apartment' %}" class="btn btn-primary mb-3">
+    + Create New Apartment
+  </a>
+{% endif %}
+
 
         <!-- Apartment grid -->
         <div id="apartment-results" class="grid-card">

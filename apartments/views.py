@@ -7,6 +7,10 @@ from offers.models import PurchaseOffer
 from django.http import JsonResponse
 from .models import Apartment
 from django.db.models import Q
+from apartments.forms.apartment_create_form import ApartmentCreateForm
+from django.contrib.auth.decorators import login_required
+
+
 
 
 
@@ -17,7 +21,7 @@ def seller_detail(request, pk):
         'seller': seller,
         'apartments': apartments,
     })
-
+@login_required
 def update_apartment(request, pk):
     apartment = get_object_or_404(Apartment, pk=pk)
 
@@ -31,7 +35,7 @@ def update_apartment(request, pk):
 
     return render(request, 'apartments/update_apartment.html', {'form': form, 'apartment': apartment})
 
-
+@login_required
 @require_POST
 def delete_apartment(request, pk):
     apartment = get_object_or_404(Apartment, pk=pk) #Arnar notar id=id í sínum kóða
@@ -40,7 +44,7 @@ def delete_apartment(request, pk):
     return redirect('apartments_list') #þetta segir hvert við förum eftir delete
 
 
-#@login_required byrjum á að kommenta þetta út
+@login_required
 def create_apartment(request):
     if request.method == "POST":
         form = ApartmentCreateForm(request.POST)
@@ -109,10 +113,6 @@ def apartments_list(request):
 def home_view(request):
     featured_apartments = Apartment.objects.all()[:3] #sækir fyrstu þrjár íbúðirnar
     return render(request, 'home.html', {'apartments': featured_apartments})
-
-# def apartment_detail(request, pk):
-#     apartment = get_object_or_404(Apartment, pk=pk)
-#     return render(request, 'apartments/apartment_detail.html', {'apartment': apartment})
 
 def apartment_detail(request, pk):
     apartment = get_object_or_404(Apartment, pk=pk)
