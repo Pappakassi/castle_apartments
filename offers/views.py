@@ -1,90 +1,117 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import PurchaseOffer
-from apartments.models import Apartment
-from .forms import PurchaseOfferForm
-from django.shortcuts import render
-from offers.models import PurchaseOffer
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import PurchaseOffer, ContactInfo, Payment, CreditCardPayment, BankTransferPayment, MortgagePayment
-from .forms import ContactInfoForm, PaymentForm, CreditCardPaymentForm, BankTransferPaymentForm, MortgagePaymentForm
+
+from .models import (
+    PurchaseOffer,
+    ContactInfo,
+    Payment,
+    CreditCardPayment,
+    BankTransferPayment,
+    MortgagePayment
+)
+from .forms import (
+    ContactInfoForm,
+    PaymentForm,
+    CreditCardPaymentForm,
+    BankTransferPaymentForm,
+    MortgagePaymentForm
+)
 
 @login_required
 def finalize_contact(request, offer_id):
-    offer = get_object_or_404(PurchaseOffer, id=offer_id, buyer=request.user, status__in=['accepted', 'contingent'])
+    offer = get_object_or_404(PurchaseOffer, pk=offer_id)
 
-    form = ContactInfoForm(request.POST or None, instance=offer.contact_info)
+    if request.method == 'POST':
+        form = ContactInfoForm(request.POST)
+        if form.is_valid():
+            request.session['contact_info'] = form.cleaned_data
+            return redirect('finalize_payment', offer_id=offer_id)
+    else:
+        initial = request.session.get('contact_info', {})
+        form = ContactInfoForm(initial=initial)
 
-    if request.method == 'POST' and form.is_valid():
-        contact_info = form.save()
-        offer.contact_info = contact_info
-        offer.save()
-        return redirect('finalize_payment', offer_id=offer.id)
-
-    return render(request, 'offers/finalize_contact.html', {'form': form, 'offer': offer})
+    return render(request, 'offers/finalize_contact.html', {'form': form, 'offer_id': offer_id})
 
 
 @login_required
 def finalize_payment(request, offer_id):
-    offer = get_object_or_404(PurchaseOffer, id=offer_id, buyer=request.user)
+    offer = get_object_or_404(PurchaseOffer, pk=offer_id)
+    payment_type = request.session.get('payment', {}).get('type')
 
-    payment_form = PaymentForm(request.POST or None)
-    credit_form = CreditCardPaymentForm(request.POST or None)
-    bank_form = BankTransferPaymentForm(request.POST or None)
-    mortgage_form = MortgagePaymentForm(request.POST or None)
+    if request.method == 'POST':
+        payment_form = PaymentForm(request.POST)
+        credit_form = CreditCardPaymentForm(request.POST, prefix='credit')
+        bank_form = BankTransferPaymentForm(request.POST, prefix='bank')
+        mortgage_form = MortgagePaymentForm(request.POST, prefix='mortgage')
 
-    if request.method == 'POST' and payment_form.is_valid():
-        payment = payment_form.save()
-        offer.payment = payment
-        offer.save()
+        if payment_form.is_valid():
+            request.session['payment'] = payment_form.cleaned_data
+            payment_type = payment_form.cleaned_data['type']
 
-        payment_type = payment.type
-
-        if payment_type == 'credit_card' and credit_form.is_valid():
-            credit = credit_form.save(commit=False)
-            credit.payment = payment
-            credit.save()
-
-        elif payment_type == 'bank_transfer' and bank_form.is_valid():
-            bank = bank_form.save(commit=False)
-            bank.payment = payment
-            bank.save()
-
-        elif payment_type == 'mortgage' and mortgage_form.is_valid():
-            mortgage = mortgage_form.save(commit=False)
-            mortgage.payment = payment
-            mortgage.save()
-
-        return redirect('finalize_review', offer_id=offer.id)
+            if payment_type == 'credit_card' and credit_form.is_valid():
+                request.session['payment_details'] = credit_form.cleaned_data
+                return redirect('finalize_review', offer_id=offer_id)
+            elif payment_type == 'bank_transfer' and bank_form.is_valid():
+                request.session['payment_details'] = bank_form.cleaned_data
+                return redirect('finalize_review', offer_id=offer_id)
+            elif payment_type == 'mortgage' and mortgage_form.is_valid():
+                request.session['payment_details'] = mortgage_form.cleaned_data
+                return redirect('finalize_review', offer_id=offer_id)
+    else:
+        payment_form = PaymentForm(initial=request.session.get('payment'))
+        credit_form = CreditCardPaymentForm(prefix='credit', initial=request.session.get('payment_details') if payment_type == 'credit_card' else None)
+        bank_form = BankTransferPaymentForm(prefix='bank', initial=request.session.get('payment_details') if payment_type == 'bank_transfer' else None)
+        mortgage_form = MortgagePaymentForm(prefix='mortgage', initial=request.session.get('payment_details') if payment_type == 'mortgage' else None)
 
     return render(request, 'offers/finalize_payment.html', {
-        'offer': offer,
         'payment_form': payment_form,
         'credit_form': credit_form,
         'bank_form': bank_form,
-        'mortgage_form': mortgage_form
+        'mortgage_form': mortgage_form,
+        'offer_id': offer_id,
     })
 
 
 @login_required
 def finalize_review(request, offer_id):
-    offer = get_object_or_404(PurchaseOffer, id=offer_id, buyer=request.user)
+    offer = get_object_or_404(PurchaseOffer, pk=offer_id)
+    contact_info = request.session.get('contact_info')
+    payment_data = request.session.get('payment')
+    payment_details = request.session.get('payment_details')
 
-    if request.method == 'POST' and 'confirm' in request.POST:
-        # Finalize logic here
-        return redirect('finalize_confirmation', offer_id=offer.id)
+    if request.method == 'POST':
+        contact = ContactInfo.objects.create(**contact_info)
+        payment = Payment.objects.create(type=payment_data['type'])
 
-    return render(request, 'offers/finalize_review.html', {'offer': offer})
+        if payment_data['type'] == 'credit_card':
+            CreditCardPayment.objects.create(payment=payment, **payment_details)
+        elif payment_data['type'] == 'bank_transfer':
+            BankTransferPayment.objects.create(payment=payment, **payment_details)
+        elif payment_data['type'] == 'mortgage':
+            MortgagePayment.objects.create(payment=payment, **payment_details)
+
+        offer.contact_info = contact
+        offer.payment = payment
+        offer.save()
+
+        for key in ['contact_info', 'payment', 'payment_details']:
+            request.session.pop(key, None)
+
+        return redirect('finalize_confirmation', offer_id=offer_id)
+
+    return render(request, 'offers/finalize_review.html', {
+        'contact_info': contact_info,
+        'payment': payment_data,
+        'payment_details': payment_details,
+        'offer_id': offer_id
+    })
 
 
 @login_required
 def finalize_confirmation(request, offer_id):
-    offer = get_object_or_404(PurchaseOffer, id=offer_id, buyer=request.user)
+    offer = get_object_or_404(PurchaseOffer, pk=offer_id)
     return render(request, 'offers/confirmation.html', {'offer': offer})
-
 
 @login_required
 def submit_offer(request, apartment_id):
