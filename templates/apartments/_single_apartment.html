@@ -22,15 +22,22 @@
             </div>
         </div>
         <div class="card-title">
-            <img src="{% static "images/location.png" %}" alt="Location Address" />
             <div class="card-text">
-                {{ apt.address }}
-                {{ apt.city }}
+
+                <i class="fa-solid fa-location-dot"></i>{{ apt.address }} <br />
+                {{ apt.postal_code }} {{ apt.city }} <br />
+                <i class="fa-solid fa-hashtag"></i>{{ apt.type }} <br />
+                {% if apt.is_sold %}
+                  <span class="badge bg-danger">Sold</span>
+                {% else %}
+                  <span class="badge bg-success">Available</span>
+                {% endif %}
             </div>
+            <h5 class="card-price fs-6">{{ apt.listing_price|intcomma }} kr.</h5>
+            <button class="btn btn-primary stretched-link rounded-2" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</button>
         </div>
 
-        <p class="card-price fs-6">{{ apt.listing_price|intcomma }} kr.</p>
-        <a class="btn btn-primary stretched-link rounded-2" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</a>
+
     </div>
 </div>
 
