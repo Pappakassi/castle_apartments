@@ -1,68 +1,122 @@
-/* Apartment Address */
-.apt-address {
+/* Apartment Detail Styles */
+
+.apt-address { /* Apartment Address */
     color: #2B1B12;
     font-family: Montserrat;
     font-size: 27px;
     font-weight: 700;
     word-wrap: break-word;
 }
-/* Apartment Price */
-.apt-price {
+.apt-price { /* Apartment Price */
     color: #4F3527;
     font-family: Montserrat;
     font-size: 22px;
     font-weight: 700;
     word-wrap: break-word;
 }
-
-.property-card {
+.property-card { /* Apartment Content Detail (Not image) */
   background-color: #fff5f0;
   padding: 20px;
   border-radius: 6px;
   font-family: Arial, sans-serif;
   max-width: 100%;
 }
-
-.property-header {
+.property-header {/* Apartment Location and Price */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
 }
-
-.property-location {
+.property-location { /* Apartment Location */
     font-weight: bold;
     font-size: 1.6rem;
     display: flex;
     align-items: center;
     gap: 6px;
 }
-.property-location img {
-    max-width: 0.9rem;
-    transform: translateY(-0.25rem);
-}
-
-.property-price {
+.property-price { /* Apartment Price */
   font-weight: bold;
   font-size: 1.8rem;
 }
 
-.property-info {
+.property-location img {
+    max-width: 0.9rem;
+    transform: translateY(-0.25rem);
+}
+.property-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.property-info { /* Apartment Extra Info Banner */
   display: flex;
   gap: 20px;
   margin-bottom: 12px;
   font-size: 0.95rem;
 }
 
-.property-description {
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
+
 .button-heart {
     background-color: transparent;
 }
 .button-heart:hover {
     background-color: transparent;
+}
+
+
+/* Apartment List Catalogue Cards Styles */
+.card img {
+    height: 250px !important;
+    object-fit: cover;
+}
+.card-body{
+    font-family: Montserrat !important;
+    color: #2B1B12 !important;
+    font-weight: 800;
+}
+.card-title {
+        font-size: 1em;
+}
+.mb-5{
+    margin-bottom: 1rem !important;
+}
+.card .btn{
+    border-radius: 1.5rem;
+
+}
+.grid-card {
+    gap: 20px;
+}
+.card-title {
+    font-weight: 800;
+    word-wrap: break-word;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.card-fav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+.card-price {
+    position: absolute;
+    font-size: 1.7rem;
+    right: 10px;
+    bottom: -12px;
+    padding-bottom: 10px;
+    padding-bottom: 10px;
+}
+.apartment-link a{
+    border: 0.2rem solid transparent;
+    inset: 0px;
+    position: absolute;
+    text-decoration: none;
+    transition: border 0.3s;
+    z-index: 2;
+    background-color: #2B1B12 !important;
 }
 
 #detail-buttons {
