@@ -95,7 +95,6 @@ Apartment List Catalogue Cards Styles
     position: absolute;
     left: 10px !important;
     padding-top: 4px !important;
-    display: none;
 }
 .card-title img {
     height: 2vmin !important;
@@ -141,9 +140,6 @@ Apartment List Catalogue Cards Styles
 }
 .mb-5{
     margin-bottom: 1rem !important;
-}
-.card .btn{
-    border-radius: 1.5rem;
 }
 .grid-card {
     gap: 20px;
