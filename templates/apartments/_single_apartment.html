@@ -34,7 +34,7 @@
                 {% endif %}
             </div>
             <h5 class="card-price fs-6">{{ apt.listing_price|intcomma }} kr.</h5>
-            <button class="btn btn-primary stretched-link rounded-2" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</button>
+            <a class="btn btn-primary stretched-link rounded-2" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</a>
         </div>
 
 
