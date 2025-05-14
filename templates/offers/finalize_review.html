@@ -2,16 +2,32 @@
 {% block content %}
 <div class="container mt-5">
   <h2>Step 3: Review & Confirm</h2>
-  <div class="mb-4">
-    <p><strong>Property:</strong> {{ offer.apartment.title }}</p>
-    <p><strong>Offer Price:</strong> ISK {{ offer.price|floatformat:0 }}</p>
-    <p><strong>Contact Info:</strong> {{ offer.contact_info }}</p>
-    <p><strong>Payment Type:</strong> {{ offer.payment.get_type_display }}</p>
-  </div>
+
+  <h4>Contact Info</h4>
+  <ul>
+    {% for key, value in contact_info.items %}
+      <li><strong>{{ key|title }}:</strong> {{ value }}</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Payment Type</h4>
+  <ul>
+    {% for key, value in payment.items %}
+      <li><strong>{{ key|title }}:</strong> {{ value }}</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Payment Details</h4>
+  <ul>
+    {% for key, value in payment_details.items %}
+      <li><strong>{{ key|title }}:</strong> {{ value }}</li>
+    {% endfor %}
+  </ul>
 
   <form method="post">
     {% csrf_token %}
-    <button type="submit" name="confirm" class="btn btn-success">Confirm Purchase Offer</button>
+    <a href="{% url 'finalize_payment' offer_id %}" class="btn btn-secondary">Back</a>
+    <button type="submit" class="btn btn-success">Confirm Purchase Offer</button>
   </form>
 </div>
 {% endblock %}

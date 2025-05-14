@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 text-center">
   <h2>Step 2: Payment Method</h2>
-  <form method="post">
+  <form method="post" class="mx-auto" style="max-width: 600px;">
     {% csrf_token %}
-    
     {{ payment_form.as_p }}
 
     <div id="credit-fields" style="display: none;">
@@ -23,8 +22,11 @@
       {{ mortgage_form.as_p }}
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3">Continue to Review</button>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a href="{% url 'finalize_contact' offer_id %}" class="btn btn-outline-dark px-4">Back</a>
+      <button type="submit" class="btn btn-dark px-4">Continue to Review</button>
+    </div>
   </form>
 </div>
-    <script src="{% static 'js/payment_form_toggle.js' %}"></script>
+<script src="{% static 'js/payment_form_toggle.js' %}"></script>
 {% endblock %}
