@@ -20,23 +20,6 @@ section, .bg-body-tertiary{
     transform: translateX(-50%) !important;
 }
 
-.card {
-    font-family: Montserrat !important;
-    background: #DDC7BB !important;
-    /*
-    width: 18rem; !important;
-    padding: 0px !important;
-    margin: 0px !important;
-    max-width: 600px !important;
-    border-radius: 0.2rem;
-    box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
-    */
-}
-.card:hover {
-    transform: scale(1.04);
-
-}
-
 .card-apartments {
     font-family: Montserrat !important;
     background: #DDC7BB !important;
@@ -65,9 +48,7 @@ section, .bg-body-tertiary{
     margin-left: auto;
 }
 
-#fav-location {
-    height: 2vmin !important;
-}
+
 .btn{
     display:inline-block !important;
     padding:8px 12px !important;

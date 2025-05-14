@@ -1,29 +1,35 @@
 {% load static %}
+{% load humanize %}
 <div class="card rounded-4">
     {% with id_str=apt.id|stringformat:"s" %}
-      <img src="{% static 'images/apartments/'|add:id_str|add:'/1.jpg' %}" class="card-img-top" style="max-height: 300px;" alt="{{ apt.title }}">
+      <img src="{% static 'images/apartments/'|add:id_str|add:'/1.jpg' %}" class="card-img-top rounded-top-4" style="max-height: 300px;" alt="{{ apt.title }}">
     {% endwith %}
 
-    <div class="card-body">
-        <h5 class="card-title">
-            <img src="{% static "images/location.png" %}" id="fav-location" />
-            {{ apt.address }}
-        </h5>
-        <div class="property-info">
-                    <div>{{ apartment.num_rooms }} Rooms</div>
-                    <div>{{ apartment.square.meters }} m²</div>
-                    <div>{{ apartment.num_bedrooms }} Bedrooms </div>
-                    <div>{{ apartment.num_bathrooms }} Bathrooms</div>
-                </div>
+    <div class="card-info">
+        <!-- Show Apartment Extra Detail -->
         <div class="card-fav">
-          <div class="card-text" style="display: flex; align-items: center; gap: 0.25rem;">
-            <i class="bi bi-door-closed"><img src="{% static "images/fav-rooms.png" %}" id="fav-location" /></i> 3{{ apt.rooms }} Rooms
-          </div>
-          <div class="card-text" style="display: flex; align-items: center; gap: 0.25rem;">
-            <i class="bi bi-rulers"><img src="{% static "images/fav-square.png" %}" id="fav-location" /></i> 100{{ apt.size }} m²
-          </div>
+            <div class="card-info-item">
+                <i class="fa fa-couch"></i> {{ apt.num_rooms }}
+            </div>
+            <div class="card-info-item"> <!-- style="display: flex; align-items: center; gap: 0.25rem;" -->
+                <i class="fa fa-ruler fa-ruler"></i> 100{{ apt.size }} m²
+            </div>
+            <div class="card-info-item">
+                <i class="fa fa-bed"></i> {{ apt.num_bedrooms }}
+            </div>
+            <div class="card-info-item">
+                <i class="fa fa-bath"></i> {{ apt.num_bathrooms }}
+            </div>
         </div>
-        <p class="card-price fs-6">{{ apt.listing_price|floatformat:0 }} kr.</p>
+        <div class="card-title">
+            <img src="{% static "images/location.png" %}" alt="Location Address" />
+            <div class="card-text">
+                {{ apt.address }}
+                {{ apt.city }}
+            </div>
+        </div>
+
+        <p class="card-price fs-6">{{ apt.listing_price|intcomma }} kr.</p>
         <a class="btn btn-primary stretched-link rounded-2" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</a>
     </div>
 </div>
