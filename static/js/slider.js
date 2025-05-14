@@ -1,20 +1,48 @@
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const carouselElement = document.querySelector('#carouselExampleCaptions');
-    const toggleBtn = document.getElementById('carousel-toggle');
-    const carousel = bootstrap.Carousel.getOrCreateInstance(carouselElement);
+document.addEventListener('DOMContentLoaded', function () {
+  const triggers = document.querySelectorAll('.open-modal');
+  const modal = new bootstrap.Modal(document.getElementById('carouselModal'));
+  const modalCarousel = document.getElementById('modalCarousel');
 
-    let isPaused = false;
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function () {
+      const index = parseInt(this.getAttribute('data-index'));
 
-    toggleBtn.addEventListener('click', function () {
-      if (isPaused) {
-        carousel.cycle(); // resume autoplay
-        toggleBtn.innerHTML = '⏸️ Pause';
-      } else {
-        carousel.pause(); // stop autoplay
-        toggleBtn.innerHTML = '▶️ Play';
+      // Show modal
+      modal.show();
+
+      // Reset active slide in modal carousel
+      const items = modalCarousel.querySelectorAll('.carousel-item');
+      const indicators = modalCarousel.querySelectorAll('[data-bs-slide-to]');
+
+      items.forEach((item, i) => {
+        item.classList.remove('active');
+        if (i === index) item.classList.add('active');
+      });
+
+      if (indicators.length) {
+        indicators.forEach((btn, i) => {
+          btn.classList.remove('active');
+          if (i === index) btn.classList.add('active');
+        });
       }
-      isPaused = !isPaused;
     });
   });
-</script>
+});
+
+// thumbnail fix for carousel
+document.addEventListener('DOMContentLoaded', function () {
+  const mainCarousel = document.getElementById('carouselExampleCaptions');
+  const thumbnailButtons = document.querySelectorAll('.carousel-thumb');
+
+  mainCarousel.addEventListener('slid.bs.carousel', function (e) {
+    const activeIndex = e.to;
+
+    // Remove 'active' from all thumbnails
+    thumbnailButtons.forEach(btn => btn.classList.remove('active'));
+
+    // Add 'active' to the matching thumbnail
+    if (thumbnailButtons[activeIndex]) {
+      thumbnailButtons[activeIndex].classList.add('active');
+    }
+  });
+});

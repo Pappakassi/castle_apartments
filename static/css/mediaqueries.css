@@ -1,15 +1,15 @@
 
 .custom-carousel {
     margin: 0 auto;
-    width: 60%;
-    height: 30em;
+    width: 50%;
+    height: 15em;
     max-width: 100%; /* fallback default */
     transition: width 0.3s ease;
 }
 
 .carousel-item img {
-  width: 100%;
-  height: 30em;
+  width: 70%;
+  height:15em;
   object-fit: cover;
   max-height: 80vh; /* Limits height on large screens */
 }

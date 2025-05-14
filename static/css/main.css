@@ -13,10 +13,7 @@ section, .bg-body-tertiary{
     padding-top: 0px;
     padding-bottom: 0px;
 }
-section{
-    padding-top:30px;
-    padding-bottom: 30px;
-}
+
 .top-section {
     width: 100vw !important;
     margin-left: 50% !important;
