@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Seller List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Sellers</h2>
+  <div class="row">
+    {% for seller in sellers %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <img src="{{ seller.logo|default:'/static/images/profile_fallback.png' }}"
+                 alt="{{ seller.name }}"
+                 class="rounded-circle mb-3"
+                 style="width: 80px; height: 80px; object-fit: cover;" />
+            <h5 class="card-title">{{ seller.name }}</h5>
+            <a href="{% url 'seller_detail' seller.id %}" class="btn btn-outline-primary btn-sm">View Profile</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No sellers available.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

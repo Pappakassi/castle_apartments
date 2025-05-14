@@ -10,7 +10,11 @@ from django.db.models import Q
 from apartments.forms.apartment_create_form import ApartmentCreateForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from .models import Seller
 
+def seller_list(request):
+    sellers = Seller.objects.all()
+    return render(request, 'apartments/seller_list.html', {'sellers': sellers})
 
 
 
