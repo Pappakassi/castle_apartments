@@ -32,14 +32,14 @@
 
 .property-location {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.6rem;
     display: flex;
     align-items: center;
     gap: 6px;
-    transform: translateX(-50px);
 }
 .property-location img {
-    max-width: 2rem;
+    max-width: 0.9rem;
+    transform: translateY(-0.25rem);
 }
 
 .property-price {
@@ -62,6 +62,11 @@
     background-color: transparent;
 }
 .button-heart:hover {
-    transform: translateX(1.04);
     background-color: transparent;
+}
+
+#detail-buttons {
+    font-size: small;
+    padding: 5px 10px;
+    border: 0px;
 }

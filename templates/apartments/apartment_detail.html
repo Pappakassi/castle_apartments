@@ -3,9 +3,9 @@
 {% block title %}{{ apartment.title }} - Details{% endblock %}
 
 {% block content %}
-    <div class="container-fluid px-0">
+    <section class="pt-4 pb-2">
         {% include 'apartments/_slides.html' %}
-    </div>
+    </section>
     <section>
         <div class="container">
             <div class="property-card">
@@ -13,10 +13,10 @@
               <div class="property-header">
                 <div class="property-location">
                   <span class="icon"><img src="../../static/images/location.png"></span>
-                  <strong>Heklumýri 15, 105 Reykjavík</strong>
+                    {{  apartment.address }}
                 </div>
                 <div class="property-price">
-                  38,300,000 kr.
+                    {{  apartment.listing_price }} kr.
                 </div>
               </div>
                 <div class="property-info">
