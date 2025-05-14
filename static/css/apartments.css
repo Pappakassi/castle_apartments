@@ -1,68 +1,182 @@
-/* Apartment Address */
-.apt-address {
+/*
+
+Apartment Detail Styles
+ - Þessir stílar stilla útlit á home/apartments/apartments_detail.html
+
+ */
+
+.apt-address { /* Apartment Address */
     color: #2B1B12;
     font-family: Montserrat;
     font-size: 27px;
     font-weight: 700;
     word-wrap: break-word;
 }
-/* Apartment Price */
-.apt-price {
+.apt-price { /* Apartment Price */
     color: #4F3527;
     font-family: Montserrat;
     font-size: 22px;
     font-weight: 700;
     word-wrap: break-word;
 }
-
-.property-card {
-  background-color: #fff5f0;
+.property-card { /* Apartment Content Detail (Not image) */
   padding: 20px;
   border-radius: 6px;
   font-family: Arial, sans-serif;
   max-width: 100%;
 }
-
-.property-header {
+.property-header {/* Apartment Location and Price */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
 }
-
-.property-location {
+.property-location { /* Apartment Location */
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     display: flex;
     align-items: center;
     gap: 6px;
 }
-.property-location img {
+.property-location img { /* Favicon for location */
     max-width: 0.9rem;
     transform: translateY(-0.25rem);
 }
-
-.property-price {
+.property-price { /* Apartment Price */
   font-weight: bold;
   font-size: 1.8rem;
 }
-
-.property-info {
+.property-info { /* Apartment Extra Info Banner */
   display: flex;
   gap: 20px;
   margin-bottom: 12px;
   font-size: 0.95rem;
 }
-
-.property-description {
+.property-description { /* Apartment Description Text */
   font-size: 0.9rem;
   line-height: 1.4;
 }
-.button-heart {
+.button-heart { /* favorites button */
     background-color: transparent;
 }
-.button-heart:hover {
+.button-heart:hover { /* favorites button hover */
     background-color: transparent;
+}
+
+
+/*
+Apartment List Catalogue Cards Styles
+ - Þessir stílar stjórna útliti fyrir home/apartments_list.html
+*/
+
+.card {
+    font-family: Montserrat !important;
+    background: #FEF7F2 !important;
+    width: 18rem; !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    max-width: 600px !important;
+    border-radius: 0.2rem;
+    box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
+
+}
+.card:hover {
+    transform: scale(1.01);
+}
+.card img {
+    height: 250px !important;
+    object-fit: cover;
+}
+.card-title {
+    font-size: 1.2em;
+    padding-left:30px !important;
+}
+.card-title i {
+    position: absolute;
+    left: 10px !important;
+    padding-top: 4px !important;
+    display: none;
+}
+.card-title img {
+    height: 2vmin !important;
+}
+.card-info { /* Container For Apartment Info On Card */
+    font-size: 0.95rem;
+    color: #000000;
+}
+.card-fav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    background-color: #FEF7F2;
+    border-bottom: 1px solid black;
+}
+.card-info i {
+  margin-right: 0.3rem;
+  color: #000000;
+}
+.card-info-item {
+  display: flex;
+  align-items: center;
+  margin: 0.3rem 0.5rem;
+    color: #000000;
+}
+.card-info-item {
+    transform: scale(1.02);
+}
+.card-info .btn{
+    text-decoration: none; !important;
+    background-color: #2B1B12 !important;
+    font-size: 0.7rem !important;
+    padding: 0.4em 1em !important;
+    margin-top: 5px !important;
+    border-radius: 0px;
+}
+.card-info .btn:hover{
+    text-decoration: none; !important;
+    border-radius: 0px;
+}
+.mb-5{
+    margin-bottom: 1rem !important;
+}
+.card .btn{
+    border-radius: 1.5rem;
+}
+.grid-card {
+    gap: 20px;
+}
+.card-title {
+    font-weight: 800;
+    word-wrap: break-word;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.card-text {
+    margin: 1rem 1rem;
+}
+.card-price {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+    padding-bottom: 10px;
+    padding-bottom: 10px;
+}
+.card-price {
+    font-weight: bold !important;
+    font-size: 1.7rem !important;
+
+}
+.apartment-link a{
+    border: 0.2rem solid transparent;
+    inset: 0px;
+    position: absolute;
+    text-decoration: none;
+    transition: border 0.3s;
+    z-index: 2;
+    background-color: #2B1B12 !important;
 }
 
 #detail-buttons {
@@ -70,3 +184,5 @@
     padding: 5px 10px;
     border: 0px;
 }
+
+

@@ -1,0 +1,9 @@
+.seller-profile {
+    background-color: #FFFFFF !important;
+}
+
+.seller-profile div img {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: cover;
+}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Your apps
     'users.apps.UsersConfig',
     'apartments.apps.ApartmentsConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
