@@ -33,7 +33,7 @@ class Apartment(models.Model):
     listing_price = models.PositiveIntegerField()
     is_sold = models.BooleanField(default=False)
     listing_date = models.DateField(auto_now_add=True)
-    image = models.URLField(max_length=500, blank=True)
+    image = models.CharField(max_length=500, blank=True)
 
     # Newly added fields:
     num_rooms = models.PositiveIntegerField(default=1)

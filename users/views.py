@@ -13,8 +13,7 @@ from django.contrib import messages  # Add this import at the top
 
 
 
-#Favoriting is an action performed by a user (Buyer).
-#It's conceptually part of the user's account behavior, not apartment management.
+# Add an apartment to the current user's list of favorites
 @login_required
 def favorite_apartment(request, apartment_id):
     buyer = request.user.buyer
@@ -22,6 +21,7 @@ def favorite_apartment(request, apartment_id):
     buyer.favorites.add(apartment)
     return redirect('apartment_detail', pk=apartment.id)  # 🔧 fixed
 
+# Remove an apartment from the user's favorites
 @login_required
 def unfavorite_apartment(request, apartment_id):
     buyer = request.user.buyer
@@ -30,7 +30,7 @@ def unfavorite_apartment(request, apartment_id):
     return redirect('apartment_detail', pk=apartment.id)  # 🔧 fixed
 
 
-
+# Handles user registration using Django’s built-in form
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -41,19 +41,7 @@ def register(request):
         form = UserCreationForm() #þetta er innbyggt í django
     return render(request, 'users/register.html', {'form': form})
 
-# @login_required
-# def profile_view(request):
-#     # If user is staff/admin, redirect to admin panel
-#     if request.user.is_staff or request.user.is_superuser:
-#         return redirect('/admin/')
-#
-#     try:
-#         buyer = request.user.buyer
-#     except Buyer.DoesNotExist:
-#         return redirect('/')
-#
-#     return render(request, 'users/profile.html', {'buyer': buyer})
-
+# Displays the logged-in user's profile page
 @login_required
 def profile_view(request):
     # Redirect admin/staff users to the admin panel
@@ -73,7 +61,7 @@ def profile_view(request):
     })
 
 
-
+# Allow the user to edit their buyer profile
 @login_required
 def edit_profile(request):
     buyer = request.user.buyer
