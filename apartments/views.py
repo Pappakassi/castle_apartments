@@ -12,14 +12,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import Seller
 
+# View to display a list of all sellers
 def seller_list(request):
     sellers = Seller.objects.all()
     return render(request, 'apartments/seller_list.html', {'sellers': sellers})
 
-
-
-
-
+# View to show details of a specific seller and the apartments they have for sale
 def seller_detail(request, pk):
     seller = get_object_or_404(Seller, pk=pk)
     apartments = seller.apartment_set.filter(is_sold=False)
@@ -27,6 +25,8 @@ def seller_detail(request, pk):
         'seller': seller,
         'apartments': apartments,
     })
+
+# View to update an existing apartment (accessible only by logged-in users)
 @login_required
 def update_apartment(request, pk):
     apartment = get_object_or_404(Apartment, pk=pk)
@@ -41,6 +41,7 @@ def update_apartment(request, pk):
 
     return render(request, 'apartments/update_apartment.html', {'form': form, 'apartment': apartment})
 
+# View to delete an apartment (POST-only, logged-in users)
 @login_required
 @require_POST
 def delete_apartment(request, pk):
@@ -49,7 +50,7 @@ def delete_apartment(request, pk):
     messages.success(request, "Apartment deleted successfully.")
     return redirect('apartments_list') #þetta segir hvert við förum eftir delete
 
-
+# View to create a new apartment listing (accessible only by logged-in users)
 @login_required
 def create_apartment(request):
     if request.method == "POST":
@@ -64,6 +65,7 @@ def create_apartment(request):
 
     return render(request, 'apartments/create_apartment.html', {'form': form})
 
+# View to list all apartments with support for filtering, searching, sorting, and API response
 def apartments_list(request):
     apartments = Apartment.objects.all()
     search = request.GET.get('search_filter')
@@ -124,6 +126,7 @@ def apartments_list(request):
     })
 
 
+# View for rendering the home page and showing 3 featured apartments
 def home_view(request):
     breadcrumbs = [
         {'name': 'Home', 'url': ''},
@@ -137,6 +140,7 @@ def home_view(request):
         'breadcrumbs': breadcrumbs,
     })
 
+# View to display a specific apartment's details (including any existing offer by the logged-in user)
 def apartment_detail(request, pk):
     apartment = get_object_or_404(Apartment, pk=pk)
 
