@@ -8,7 +8,7 @@ from apartments.models import Apartment
 from users.models import Buyer
 from django.contrib.auth.decorators import login_required
 from users.forms.buyer_form import BuyerForm
-from django.contrib import messages  # Add this import at the top
+from django.contrib import messages
 
 
 
