@@ -43,12 +43,20 @@ def register(request):
 
 # @login_required
 # def profile_view(request):
-#     buyer = request.user.buyer
+#     # If user is staff/admin, redirect to admin panel
+#     if request.user.is_staff or request.user.is_superuser:
+#         return redirect('/admin/')
+#
+#     try:
+#         buyer = request.user.buyer
+#     except Buyer.DoesNotExist:
+#         return redirect('/')
+#
 #     return render(request, 'users/profile.html', {'buyer': buyer})
 
 @login_required
 def profile_view(request):
-    # If user is staff/admin, redirect to admin panel
+    # Redirect admin/staff users to the admin panel
     if request.user.is_staff or request.user.is_superuser:
         return redirect('/admin/')
 
@@ -57,7 +65,13 @@ def profile_view(request):
     except Buyer.DoesNotExist:
         return redirect('/')
 
-    return render(request, 'users/profile.html', {'buyer': buyer})
+    favorites = buyer.favorites.all()
+
+    return render(request, 'users/profile.html', {
+        'buyer': buyer,
+        'favorites': favorites,
+    })
+
 
 
 @login_required
