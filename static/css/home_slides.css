@@ -16,6 +16,11 @@
     object-fit: cover;
     margin: 0 auto;
 }
+.card-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
 
 
 @media (max-width: 576px) {

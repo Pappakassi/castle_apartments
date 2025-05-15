@@ -13,12 +13,13 @@
 }
 
 .seller-profile img {
-    max-width: 80px !important;
-    max-height: 80px !important;
-    object-fit: cover!important;
-
+    max-width: 80px;
+    max-height: 80px;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
 }
 .card {
     box-shadow: none !important;
-    border: 0px;
+    border: 0px !important;
 }

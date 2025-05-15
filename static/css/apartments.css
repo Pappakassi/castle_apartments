@@ -78,42 +78,8 @@ Apartment List Catalogue Cards Styles
  - Þessir stílar stjórna útliti fyrir home/apartments_list.html
 */
 
-.card {
-    font-family: Montserrat;
-    width: 100%;
-    max-width: 100%;
-    background: #FEF7F2;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 0.2rem;
-    box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
-}
-.card:hover {
-    transform: scale(1.01);
-}
-.card img {
-    height: 210px !important;
-    object-fit: cover;
-}
-.card-title {
-    font-size: 1.2em;
-    padding-left:30px !important;
-}
-.fa-hashtag, .apt-type {
-    font-size: 0.6em;
-}
-.card-title i {
-    position: absolute;
-    left: 10px !important;
-    padding-top: 4px !important;
-}
-.card-title img {
-    height: 2vmin !important;
-}
-.card-info { /* Container For Apartment Info On Card */
-    font-size: 0.95rem;
-    color: #000000;
-}
+
+
 .card-fav {
     display: flex;
     justify-content: space-around;
@@ -137,43 +103,10 @@ Apartment List Catalogue Cards Styles
 .card-info-item {
     transform: scale(1.02);
 }
-.card-info .btn{
-    text-decoration: none; !important;
-    background-color: #2B1B12 !important;
-    font-size: 0.7rem !important;
-    padding: 0.4em 1em !important;
-    margin-top: 5px !important;
-    border-radius: 0px;
-}
-.card-info .btn:hover{
-    text-decoration: none; !important;
-    border-radius: 0px;
-}
-.mb-5{
-    margin-bottom: 1rem !important;
-}
-.grid-card {
-    display: grid;
-    gap: 20px;
-}
-.card-title {
-    font-weight: 800;
-    word-wrap: break-word;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
 .card-text {
     margin: 1rem 1rem;
 }
-.card-price {
-    position: absolute;
-    right: 20px;
-    bottom: 0px;
-    padding-bottom: 10px;
-    padding-bottom: 10px;
-    font-weight: bold !important;
-    font-size: 1.1em !important;
-}
+
 .apartment-link a{
     border: 0.2rem solid transparent;
     inset: 0px;
@@ -184,14 +117,5 @@ Apartment List Catalogue Cards Styles
     background-color: #2B1B12 !important;
 }
 
-.grid-card .card {
-  width: 100%;
-  max-width: 100%;
-}
 
-.grid-card {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin: 20px 0;
-}
+

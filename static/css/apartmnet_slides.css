@@ -89,18 +89,6 @@
   border: none !important;
   box-shadow: none !important;
 }
-
-.btn-close btn-close-fullscreen{
-  z-index: 100;
-}
-
-#carouselButtons {
-    margin-left: 100px;
-    position: absolute;
-    bottom: 5px;
-    right: 25px;
-}
-
 .modal.custom-slide .modal-dialog {
   transform: translateY(-100%);
   transition: transform 0.3s ease-out;
@@ -108,30 +96,6 @@
 .modal.custom-slide.show .modal-dialog {
   transform: translateY(0);
 }
-
-.card-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.5rem;
-}
-
-.sold-banner {
-  position: absolute;
-  top: 26px;
-  left: -50px;
-  width: 200px;
-  text-align: center;
-  background-color: red;
-  color: white;
-  font-weight: bold;
-  transform: rotate(-45deg);
-  z-index: 20;
-  padding: 5px 0;
-  font-size: 1rem;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  pointer-events: none;
-}
-
 
 @media (max-width: 576px) {
     .custom-carousel {

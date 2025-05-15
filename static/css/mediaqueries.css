@@ -1,8 +1,3 @@
-.grid-card {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-
 @media (max-width: 576px) {
 }
 
