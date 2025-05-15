@@ -117,5 +117,19 @@ Apartment List Catalogue Cards Styles
     background-color: #2B1B12 !important;
 }
 
+.seller-profile {
+    border: 1px solid gray;
+    width: 200px;
+    padding: 15px;
+}
+
+.seller-profile img {
+    max-width: 80px;
+    max-height: 80px;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
 
 
