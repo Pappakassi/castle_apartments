@@ -35,10 +35,15 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save() #þetta vistar notandann
+            user = form.save()
+
+            #Create a Buyer profile for the new user
+            Buyer.objects.create(user=user, name=user.username)
+
             return redirect('login')  # or any success page
     else:
-        form = UserCreationForm() #þetta er innbyggt í django
+        form = UserCreationForm()
+
     return render(request, 'users/register.html', {'form': form})
 
 # Displays the logged-in user's profile page
