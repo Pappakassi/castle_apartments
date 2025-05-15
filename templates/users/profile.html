@@ -23,4 +23,29 @@
     <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">Edit Profile</a>
   </div>
 </div>
+    <hr class="my-5" />
+
+<h3 class="text-center mb-4">Your Favorite Apartments</h3>
+<div class="row">
+  {% for apt in favorites %}
+    <div class="col-md-4 mb-4">
+      <a href="{% url 'apartment_detail' apt.pk %}" style="text-decoration: none; color: inherit;">
+        <div class="card h-100 shadow-sm">
+          {% with id_str=apt.id|stringformat:"s" %}
+            <img src="{% static 'images/apartments/'|add:id_str|add:'/1.jpg' %}"
+                 class="card-img-top"
+                 alt="{{ apt.title }}"
+                 style="height:200px; object-fit:cover;" />
+          {% endwith %}
+          <div class="card-body">
+            <h5 class="card-title">{{ apt.address }}</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  {% empty %}
+    <p>You haven't favorited any apartments yet.</p>
+  {% endfor %}
+</div>
+
 {% endblock %}

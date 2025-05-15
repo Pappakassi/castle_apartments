@@ -1,33 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 text-center">
   <h2>Step 3: Review & Confirm</h2>
 
-  <h4>Contact Info</h4>
-  <ul>
-    {% for key, value in contact_info.items %}
-      <li><strong>{{ key|title }}:</strong> {{ value }}</li>
-    {% endfor %}
-  </ul>
+  <div class="mx-auto" style="max-width: 600px; text-align: left;">
+    <h4 class="mt-4">Contact Info</h4>
+    <ul class="list-group mb-3">
+      {% for key, value in contact_info.items %}
+        <li class="list-group-item">
+          <strong>
+            {% if key == "national_id" %}
+              National ID
+            {% elif key == "postal_code" %}
+              Postal code
+            {% elif key == "street_name" %}
+              Street name
+            {% elif key == "address" %}
+              Address
+            {% elif key == "city" %}
+              City
+            {% elif key == "country" %}
+              Country
+            {% else %}
+              {{ key|title }}
+            {% endif %}
+          :</strong> {{ value }}
+        </li>
+      {% endfor %}
+    </ul>
 
-  <h4>Payment Type</h4>
-  <ul>
-    {% for key, value in payment.items %}
-      <li><strong>{{ key|title }}:</strong> {{ value }}</li>
-    {% endfor %}
-  </ul>
+    <h4>Payment Type</h4>
+    <ul class="list-group mb-3">
+      {% for key, value in payment.items %}
+        <li class="list-group-item"><strong>{{ key|title }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
 
-  <h4>Payment Details</h4>
-  <ul>
-    {% for key, value in payment_details.items %}
-      <li><strong>{{ key|title }}:</strong> {{ value }}</li>
-    {% endfor %}
-  </ul>
+    <h4>Payment Details</h4>
+    <ul class="list-group mb-4">
+      {% for key, value in payment_details.items %}
+        <li class="list-group-item"><strong>{{ key|title }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
 
-  <form method="post">
-    {% csrf_token %}
-    <a href="{% url 'finalize_payment' offer_id %}" class="btn btn-secondary">Back</a>
-    <button type="submit" class="btn btn-success">Confirm Purchase Offer</button>
-  </form>
+    <form method="post" class="d-flex justify-content-center gap-3">
+      {% csrf_token %}
+      <a href="{% url 'finalize_payment' offer_id %}" class="btn btn-outline-dark px-4">Back</a>
+      <button type="submit" class="btn btn-dark px-4">Confirm Purchase Offer</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

@@ -3,6 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from apartments.models import Apartment
 from .forms import PurchaseOfferForm
+from django.shortcuts import render
+from .models import PurchaseOffer
+from apartments.models import Apartment
+from django.db.models import Q
+
 
 
 from .models import (
@@ -20,6 +25,29 @@ from .forms import (
     BankTransferPaymentForm,
     MortgagePaymentForm
 )
+
+def filtered_offer_list(request):
+    search = request.GET.get("search-value", "")
+    city = request.GET.get("city", "")
+    apt_type = request.GET.get("type", "")
+
+    offers = PurchaseOffer.objects.select_related('apartment', 'apartment__seller')
+
+    if search:
+        offers = offers.filter(
+            Q(apartment__address__icontains=search) |
+            Q(apartment__title__icontains=search) |
+            Q(apartment__city__icontains=search) |
+            Q(apartment__description__icontains=search)
+        )
+
+    if city:
+        offers = offers.filter(apartment__city=city)
+    if apt_type:
+        offers = offers.filter(apartment__type=apt_type)
+
+    return render(request, 'offers/offer_list.html', {'offers': offers})
+
 
 @login_required
 def finalize_contact(request, offer_id):
