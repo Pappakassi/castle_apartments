@@ -41,3 +41,9 @@
     </div>
   </div>
 </nav>
+
+{% if breadcrumbs %}
+    <div class="breadcrumbs">
+        {% include '_breadcrumb.html' %}
+    </div>
+{% endif %}

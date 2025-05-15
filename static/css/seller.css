@@ -1,9 +1,24 @@
 .seller-profile {
     background-color: #FFFFFF !important;
+    box-shadow: none !important;
+    border: 0px;
+}
+.seller-profile img {
+    width: 64px;
 }
 
-.seller-profile div img {
-    width: 80px !important;
-    height: 80px !important;
-    object-fit: cover;
+.seller-logo {
+    width: 64px !important;
+    aspect-ratio: 1 / 1;
+}
+
+.seller-profile img {
+    max-width: 80px !important;
+    max-height: 80px !important;
+    object-fit: cover!important;
+
+}
+.card {
+    box-shadow: none !important;
+    border: 0px;
 }

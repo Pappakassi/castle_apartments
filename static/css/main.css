@@ -19,18 +19,6 @@ section, .bg-body-tertiary{
     margin-left: 50% !important;
     transform: translateX(-50%) !important;
 }
-
-.card-apartments {
-    font-family: Montserrat !important;
-    background: #DDC7BB !important;
-    width: 18rem; !important;
-    padding: 0px !important;
-    margin: 0px !important;
-    max-width: 600px !important;
-    border-radius: 0.2rem;
-    box-shadow: rgb(219, 219, 219) 0px 0.1rem 0.5rem 0.1rem;
-}
-
 .btn btn-dark {
     padding-left:10px;
     padding-left:10px;
@@ -49,11 +37,18 @@ section, .bg-body-tertiary{
 }
 
 
-.btn{
-    display:inline-block !important;
-    padding:8px 12px !important;
-    background:#2B1B12 !important;
-    color:white !important;
-    text-decoration:none !important;
-    border-radius:4px !important;
+.btn {
+    display: inline-block;
+    background: #2B1B12;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: small;
+    text-decoration: none;
+    padding: 3px 10px;
+    border: 0px;
+}
+.btn:hover {
+    background: #2B1B12 !important;
+    text-decoration: none;
 }

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Seller List{% endblock %}
+
+{% block extra_css %}
+  <!-- home slides --><link rel="stylesheet" href="{% static 'css/seller.css' %}" />
+{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
@@ -8,11 +13,10 @@
     {% for seller in sellers %}
       <div class="col-md-4 mb-4">
         <div class="card h-100">
-          <div class="card-body text-center">
+          <div class="card-body text-center seller-profile">
             <img src="{{ seller.logo|default:'/static/images/profile_fallback.png' }}"
                  alt="{{ seller.name }}"
-                 class="rounded-circle mb-3"
-                 style="width: 80px; height: 80px; object-fit: cover;" />
+                 class="rounded-circle mb-3" />
             <h5 class="card-title">{{ seller.name }}</h5>
             <a href="{% url 'seller_detail' seller.id %}" class="btn btn-outline-primary btn-sm">View Profile</a>
           </div>

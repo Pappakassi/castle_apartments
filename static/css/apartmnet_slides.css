@@ -1,0 +1,164 @@
+.carousel-caption h5 {
+    color: black;
+}
+.carousel-caption p {
+    color: black;
+}
+.carousel-control-prev {
+    justify-content: flex-start !important;
+}
+.carousel-control-next {
+    justify-content: flex-end !important;
+}
+
+/* Image indicators in the slide show */
+.carousel-indicators button {
+  opacity: 0.6;
+  border-radius: 4px;
+}
+.carousel-indicators .active {
+  opacity: 1;
+  border: 2px solid #007bff;
+}
+
+
+.custom-carousel {
+    margin: 0 auto;
+    width: 50%;
+    height: 15em;
+    max-width: 100%; /* fallback default */
+    transition: width 0.3s ease;
+}
+
+.carousel-item img {
+  width: 70%;
+  height:15em;
+  object-fit: cover;
+  max-height: 80vh; /* Limits height on large screens */
+}
+
+/* Carousel thumbnail indicators */
+.carousel-thumb {
+    aspect-ratio: 16 / 9 !important;
+    width: 100px !important;
+    overflow: hidden !important;
+    height: auto !important;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid white;
+    margin: 2px;
+    opacity: 0.6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: width 0.20s ease-in !important;
+}
+
+.carousel-thumb.active {
+    opacity: 1;
+    border-color: #007bff;
+}
+
+
+
+
+.carousel-thumb {
+  width: 60px;
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid white;
+  margin: 4px;
+  opacity: 0.8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.carousel-thumb:hover,
+.carousel-thumb.active {
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 0 0 4px rgba(0, 123, 255, 0.3);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.transparent-modal-content {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.btn-close btn-close-fullscreen{
+  z-index: 100;
+}
+
+#carouselButtons {
+    margin-left: 100px;
+    position: absolute;
+    bottom: 5px;
+    right: 25px;
+}
+
+.modal.custom-slide .modal-dialog {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-out;
+}
+.modal.custom-slide.show .modal-dialog {
+  transform: translateY(0);
+}
+
+.card-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.sold-banner {
+  position: absolute;
+  top: 26px;
+  left: -50px;
+  width: 200px;
+  text-align: center;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  z-index: 20;
+  padding: 5px 0;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+
+@media (max-width: 576px) {
+    .custom-carousel {
+        width: 100%;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .custom-carousel {
+        width: 540px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .custom-carousel {
+        width: 720px;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1250px) {
+    .carousel-container {
+        width: 960px;
+    }
+}
+
+@media (min-width: 1251px) {
+    .carousel-container {
+        width: 960px;
+    }
+}
