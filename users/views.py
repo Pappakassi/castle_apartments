@@ -11,8 +11,6 @@ from users.forms.buyer_form import BuyerForm
 from django.contrib import messages  # Add this import at the top
 
 
-
-
 #Favoriting is an action performed by a user (Buyer).
 #It's conceptually part of the user's account behavior, not apartment management.
 @login_required
