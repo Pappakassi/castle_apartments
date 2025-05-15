@@ -26,6 +26,7 @@ from .forms import (
     MortgagePaymentForm
 )
 
+# Filters offers by search term, city, and apartment type
 def filtered_offer_list(request):
     search = request.GET.get("search-value", "")
     city = request.GET.get("city", "")
@@ -48,7 +49,7 @@ def filtered_offer_list(request):
 
     return render(request, 'offers/offer_list.html', {'offers': offers})
 
-
+# First step in finalizing an offer – collect contact information
 @login_required
 def finalize_contact(request, offer_id):
     offer = get_object_or_404(PurchaseOffer, pk=offer_id)
@@ -64,7 +65,7 @@ def finalize_contact(request, offer_id):
 
     return render(request, 'offers/finalize_contact.html', {'form': form, 'offer_id': offer_id})
 
-
+# Second step – collect payment method and additional details
 @login_required
 def finalize_payment(request, offer_id):
     offer = get_object_or_404(PurchaseOffer, pk=offer_id)
@@ -103,7 +104,7 @@ def finalize_payment(request, offer_id):
         'offer_id': offer_id,
     })
 
-
+# Final step – review entered info and save it to the database
 @login_required
 def finalize_review(request, offer_id):
     offer = get_object_or_404(PurchaseOffer, pk=offer_id)
@@ -138,7 +139,7 @@ def finalize_review(request, offer_id):
         'offer_id': offer_id
     })
 
-
+# Displays confirmation message after offer is finalized
 @login_required
 def finalize_confirmation(request, offer_id):
     offer = get_object_or_404(PurchaseOffer, pk=offer_id)
@@ -170,7 +171,7 @@ def submit_offer(request, apartment_id):
         'resubmitting': offer is not None,  # optional: to customize UI
     })
 
-
+# Simple list view showing all purchase offers (used for admin or buyer)
 def offer_list(request):
     offers = PurchaseOffer.objects.select_related('apartment', 'apartment__seller').all()
     return render(request, 'offers/offer_list.html', {'offers': offers})
