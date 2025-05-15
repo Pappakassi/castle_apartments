@@ -3,6 +3,10 @@
 
 {% block title %}{{ seller.name }} - Seller Profile{% endblock %}
 
+{% block extra_css %}
+  <!-- home slides --><link rel="stylesheet" href="{% static 'css/seller.css' %}" />
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid px-0">
 {#    {% if seller.cover_image %}#}
@@ -14,9 +18,9 @@
     <div class="container mt-4">
         <div class="property-card">
             <!-- Seller Logo and Name -->
-            <div class="d-flex align-items-center mb-3">
+            <div class="d-flex align-items-center mb-3 seller-profile">
                 {% if seller.logo %}
-                    <img src="{{ seller.logo }}" alt="Logo" style="max-width:100px; height:auto; margin-right:15px;" />
+                    <img src="{{ seller.logo }}" alt="Logo" class="seller-logo" />
                 {% endif %}
                 <h2 class="mb-0">{{ seller.name }}</h2>
             </div>

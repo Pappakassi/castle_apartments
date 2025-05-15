@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Properties for Sale{% endblock %}
 
+{% block extra_css %}
+  <!-- apartment slides --><link rel="stylesheet" href="{% static 'css/apartmnet_slides.css' %}" />
+        <!-- apartments --><link rel="stylesheet" href="{% static 'css/apartments.css' %}">
+{% endblock %}
 {% block content %}
     <!-- Search and Filters -->
     <section class="container-fluid">
@@ -26,3 +31,4 @@
         </div>
     </div>
 {% endblock %}
+

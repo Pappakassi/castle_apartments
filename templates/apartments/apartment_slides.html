@@ -1,19 +1,24 @@
 {% load static %}
 
+{% block extra_css %}
+  <!-- apartment slides --><link rel="stylesheet" href="{% static 'css/apartmnet_slides.css' %}" />
+        <!-- apartments --><link rel="stylesheet" href="{% static 'css/apartments.css' %}">
+{% endblock %}
+
 <!-- Main Carousel -->
 <div id="carouselExampleCaptions" class="carousel slide custom-carousel rounded-4" data-bs-ride="carousel">
-  <div class="carousel-inner text-center">
-    {% for img in apartment.images.all %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ img.image_url }}"
-     class="d-block w-100 rounded-4 open-modal"
-     alt="{{ img.caption }}" data-bs-toggle="modal"
-           data-bs-target="#carouselModal"
-     data-index="{{ forloop.counter0 }}"
-     style="cursor: zoom-in;">
-      </div>
-    {% endfor %}
-  </div>
+    <div class="carousel-inner text-center">
+        {% for img in apartment.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ img.image_url }}"
+                class="d-block w-100 rounded-4 open-modal"
+                alt="{{ img.caption }}" data-bs-toggle="modal"
+                data-bs-target="#carouselModal"
+                data-index="{{ forloop.counter0 }}"
+                style="cursor: zoom-in;">
+            </div>
+        {% endfor %}
+    </div>
 
 <!-- Pause/Play Button -->
 <div id="carouselButtons">

@@ -1,53 +1,37 @@
 {% load static %}
 {% load humanize %}
-<div class="card rounded-4">
-    {% with id_str=apt.id|stringformat:"s" %}
-      <img src="{% static 'images/apartments/'|add:id_str|add:'/1.jpg' %}" class="card-img-top rounded-top-4" style="max-height: 300px;" alt="{{ apt.title }}">
-    {% endwith %}
-
-    <div class="card-info">
+<div class="d-flex flex-column h-100 rounded-4">
+    <div class="card h-100 shadow-sm rounded-4 card-wrapper">
+        {% with id_str=apt.id|stringformat:"s" %}
+          <img src="{% static 'images/apartments/'|add:id_str|add:'/1.jpg' %}" class="card-img-top rounded-top-4 img-fluid" alt="{{ apt.title }}" />
+        {% endwith %}
         <!-- Show Apartment Extra Detail -->
+        {% if apt.is_sold %}
+        <div class="position-absolute top-0 start-0 w-100 h-50 bg-white bg-opacity-50"></div>
+        <div class="sold-banner">Sold</div>
+        {% endif %}
         <div class="card-fav">
             <div class="card-info-item">
-                <i class="fa fa-couch"></i> {{ apt.num_rooms }}
-            </div>
-            <div class="card-info-item"> <!-- style="display: flex; align-items: center; gap: 0.25rem;" -->
-                <i class="fa fa-ruler fa-ruler"></i> 100{{ apt.size }} m²
+                <i class="fa fa-couch"> </i> &nbsp;{{ apt.num_rooms }}
             </div>
             <div class="card-info-item">
-                <i class="fa fa-bed"></i> {{ apt.num_bedrooms }}
+                <i class="fa fa-ruler fa-ruler"> </i> &nbsp;{{ apt.square_meters }} m²
             </div>
             <div class="card-info-item">
-                <i class="fa fa-bath"></i> {{ apt.num_bathrooms }}
+                <i class="fa fa-bed"> </i> &nbsp;{{ apt.num_bedrooms }}
+            </div>
+            <div class="card-info-item">
+                <i class="fa fa-bath"> </i> &nbsp;{{ apt.num_bathrooms }}
             </div>
         </div>
         <div class="card-title">
             <div class="card-text">
-
+                <i class="fa-solid fa-hashtag"></i><div class="apt_type">{{ apt.type }}</div> <br />
                 <i class="fa-solid fa-location-dot"></i>{{ apt.address }} <br />
                 {{ apt.postal_code }} {{ apt.city }} <br />
-                <i class="fa-solid fa-hashtag"></i>{{ apt.type }} <br />
-                {% if apt.is_sold %}
-                  <span class="badge bg-danger">Sold</span>
-                {% else %}
-                  <span class="badge bg-success">Available</span>
-                {% endif %}
             </div>
             <h5 class="card-price fs-6">{{ apt.listing_price|intcomma }} kr.</h5>
-            <a class="btn btn-primary stretched-link rounded-2" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</a>
+            <a class="btn btn-primary stretched-link" id="detail-button" href="{% url 'apartment_detail' apt.id %}">Details</a>
         </div>
-
-
     </div>
 </div>
-
-<!--
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card with stretched link</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-  </div>
-</div>
--->

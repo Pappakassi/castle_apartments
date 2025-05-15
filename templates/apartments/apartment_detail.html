@@ -2,11 +2,15 @@
 {% load static %}
 {% load humanize %}
 
+{% block extra_css %}
+        <!-- apartments --><link rel="stylesheet" href="{% static 'css/apartments.css' %}">
+{% endblock %}
+
 {% block title %}{{ apartment.title }} - Details{% endblock %}
 
 {% block content %}
     <section class="pt-4 pb-2">
-        {% include 'apartments/_slides.html' %}
+        {% include 'apartments/apartment_slides.html' %}
     </section>
 
     <div class="container">
@@ -18,15 +22,25 @@
                 {{  apartment.address }}
             </div>
             <div class="property-price">
-                {{  apartment.listing_price }} kr.
+                {{  apartment.listing_price|intcomma }} kr.
             </div>
           </div>
-            <div class="property-info">
-                <div>{{ apartment.num_rooms }} Rooms</div>
-                <div>{{ apartment.square.meters }} m²</div>
-                <div>{{ apartment.num_bedrooms }} Bedrooms </div>
-                <div>{{ apartment.num_bathrooms }} Bathrooms</div>
+            <div class="card-info">
+            <div class="property-fav">
+            <div class="card-info-item">
+                <i class="fa fa-couch"></i> {{ apartment.num_rooms }}
             </div>
+            <div class="card-info-item"> <!-- style="display: flex; align-items: center; gap: 0.25rem;" -->
+                <i class="fa fa-ruler fa-ruler"></i> 100{{ apt.size }} m²
+            </div>
+            <div class="card-info-item">
+                <i class="fa fa-bed"></i> {{ apartment.num_bedrooms }}
+            </div>
+            <div class="card-info-item">
+                <i class="fa fa-bath"></i> {{ apartment.num_bathrooms }}
+            </div>
+            </div>
+        </div>
             {% if user.is_authenticated and user.buyer %}
                 {% if apartment in user.buyer.favorites.all %}
                     <form method="post" action="{% url 'unfavorite' apartment.id %}">
@@ -49,6 +63,9 @@
                 {% endif %}
             {% endif %}
             <div class="property-description">
+               Listing date: {{ apartment.listing_date }} <br />
+            </div>
+            <div class="property-description">
                 <strong>Detail:</strong><br>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer<br>
@@ -56,21 +73,33 @@
                 not only five centuries, but also the leap into electronic typesetting,<br>
                 remaining essentially unchanged.
             </div>
+            {# Edit/Delete Buttons (if you have permission) #}
+            <form action="{% url 'delete_apartment' apartment.pk %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this apartment?');">
+                Delete Apartment
+              </button>
+            </form>
+
+            <a href="{% url 'update_apartment' apartment.pk %}" class="btn btn-sm btn-outline-secondary" style="margin-left: 10px;">
+                Edit Apartment
+            </a>
+            <div class="sellert-logo">
+                {% if apartment.seller.logo %}
+                <img src="{{ apartment.seller.logo }}"
+                     alt="{{ apartment.seller.name }}"
+                     class="rounded-circle me-3"/>
+              {% else %}
+                <img src="{% static 'images/profile_fallback.png' %}"
+                     alt="Default profile"
+                     class="rounded-circle me-3"/>
+              {% endif %}
+            </div>
         </div>
 
 
 
-        {# Edit/Delete Buttons (if you have permission) #}
-        <form action="{% url 'delete_apartment' apartment.pk %}" method="post" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this apartment?');">
-            Delete Apartment
-          </button>
-        </form>
 
-        <a href="{% url 'update_apartment' apartment.pk %}" class="btn btn-sm btn-outline-secondary" style="margin-left: 10px;">
-            Edit Apartment
-        </a>
 
 
 {% if apartment.seller %}
