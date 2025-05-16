@@ -98,12 +98,6 @@ def apartments_list(request):
     if order_by in ['listing_price', 'title']:
         apartments = apartments.order_by(order_by)
 
-    # Breacrumbs for navigation links
-    breadcrumbs = [
-        {'name': 'Home', 'url': '/'},
-        {'name': 'Apartments', 'url': ''},
-    ]
-
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.headers.get(
             'accept') == 'application/json':
         return JsonResponse({
@@ -122,22 +116,16 @@ def apartments_list(request):
 
     return render(request, 'apartments/apartments_list.html', {
         'apartments': apartments,
-        'breadcrumbs': breadcrumbs,
     })
 
 
 # View for rendering the home page and showing 3 featured apartments
 def home_view(request):
-    breadcrumbs = [
-        {'name': 'Home', 'url': ''},
-    ]
-
     apartments_qs = Apartment.objects.all()
     featured_apartments = apartments_qs[:3]
     return render(request, 'home.html', {
         'apartments': featured_apartments,
         'apartment': apartments_qs.first(),  # get the first apartment before slicing
-        'breadcrumbs': breadcrumbs,
     })
 
 # View to display a specific apartment's details (including any existing offer by the logged-in user)
@@ -148,16 +136,9 @@ def apartment_detail(request, pk):
     if request.user.is_authenticated:
         offer = PurchaseOffer.objects.filter(apartment=apartment, buyer=request.user).first()
 
-    breadcrumbs = [
-        {'name': 'Home', 'url': '/'},
-        {'name': 'Apartments', 'url': '/apartments/'},
-        {'name': apartment.title, 'url': ''},
-    ]
-
     return render(request, 'apartments/apartment_detail.html', {
         'apartment': apartment,
         'offer': offer,  # send full offer object (or None)
-        'breadcrumbs': breadcrumbs,
     })
 
 
